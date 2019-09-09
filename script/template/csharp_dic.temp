@@ -34,6 +34,7 @@ namespace Protocal
             }
             return null;
         }
+
         public static string GetTocNameByTypeTos(Type typeTos)
         {
             Type typeToc = null;
@@ -52,4 +53,52 @@ namespace Protocal
             }
         }
     }
+
+    {% for key,data in datas.items() %}{% if data.type == 'CodeError' %}
+    public class {{data.name}}
+    {
+        public static Dictionary<string, string> codeProto = new Dictionary<string, string>();
+        
+        static {{data.name}}()
+        { {% for key,data in datas.items() %}{% if data.type == 'CodeError' %}{% for property in data.properties %}{% if property.des %}
+            // {{ property.des }}{% endif %}
+            AddIfNotContains("{{ property.value }}", "{{ property.msg }}");{% endfor %}{% endif %}{% endfor %}
+        }
+
+        private static void AddIfNotContains(string code, string desc)
+        {
+            if (!codeProto.ContainsKey(code))
+            {
+                codeProto.Add(code, desc);
+            }
+        }
+
+        public static Type GetTocByTypeTos(Type typeTos)
+        {
+            Type typeToc = null;
+            if (dicProto.TryGetValue((typeTos), out typeToc))
+            {
+                return typeToc;
+            }
+            return null;
+        }
+
+        public static string GetTocNameByTypeTos(Type typeTos)
+        {
+            Type typeToc = null;
+            if (dicProto.TryGetValue((typeTos), out typeToc))
+            {
+
+            }
+
+            if (typeToc != null)
+            {
+                return typeToc.Name;
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+    }{% endif %}{% endfor %}
 }

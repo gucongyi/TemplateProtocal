@@ -4,16 +4,26 @@
 /**
  * {{ data.des }}
  */{% endif %}
-class {{ data.name|first_upper }}{% if data.extends %} extends {{ data.extends}}{% endif %}
+exports.{{ data.name|first_upper }} = class {{ data.name|first_upper }}
 {
 	constructor(obj)
     {
-    	super(obj);{% for property in data.properties %}{% if property.des %}
-    	//{{ property.des }}{% endif %}
-    	this.{{ property.name }} = obj.{{ property.name }}{% endfor %}
+    	{% if data.name != 'ProtoServerBaseClass' %}
+    	try {
+            //检查参数是否异常
+            if({% for property in data.properties %}obj.{{ property.name }} == null{% if not loop.last %}
+            || {% endif %}{% endfor %})
+            {
+                //抛出异常
+                throw this;
+            }
+            {% for property in data.properties %}{% if property.des %}
+	    	//{{ property.des }}{% endif %}
+	    	this.{{ property.name }} = obj.{{ property.name }}{% endfor %}
+        } catch (error) {
+            throw error;
+        }
+        {% endif %}
     }
 }
 {% endfor %}
-module.exports = { {% for key,data in datas.items() %}
-{{ data.name|first_upper }},{% endfor %}
-}

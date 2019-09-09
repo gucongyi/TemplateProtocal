@@ -44,7 +44,10 @@ def create_server():
                 enum_dict.setdefault(key, value)
         if k is 'class':
             for key, value in v.items():
-                class_dict.setdefault(key, value)
+                if 'type' in value and value['type'] == 'CodeError':
+                    req_dict.setdefault(key, value)
+                else:
+                    class_dict.setdefault(key, value)
         
     if class_dict:
         class_dict_plus = {}

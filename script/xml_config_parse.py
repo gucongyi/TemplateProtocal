@@ -94,4 +94,6 @@ def parse_properties_from_xml_config(config, result_bean):
                     property.setdefault('des', property_arr['des'])
                 if 'type' in property_arr:
                     property.setdefault('type', property_arr['type'].replace('[', '<').replace(']', '>'))
+                if 'msg' in property_arr:
+                    property.setdefault('msg', property_arr['msg'])
                 result_bean['properties'].append(property)

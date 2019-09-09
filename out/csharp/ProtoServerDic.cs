@@ -13,6 +13,7 @@ namespace Protocal
         public static List<Type> listProto = new List<Type>();
         static ProxyDic()
         { 
+            //
             AddIfNotContains(typeof(SCSignInfo), typeof(RespSignInfo));
             AddIfNotContains(typeof(CSGetInfo), typeof(RespInfo));
             listProto.Add(typeof(RespInfo));
@@ -50,6 +51,24 @@ namespace Protocal
             else
             {
                 return string.Empty;
+            }
+        }
+    }
+
+    public class ProxyDicCode
+    {
+        public static Dictionary<srting, string> codeProto = new Dictionary<srting, string>();
+        
+        static ProxyDicCode()
+        { 
+            AddIfNotContains(code, desc);
+        }
+
+        private static void AddIfNotContains(srting code, string desc)
+        {
+            if (!codeProto.ContainsKey(code))
+            {
+                codeProto.Add(code, desc);
             }
         }
     }
