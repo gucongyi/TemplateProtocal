@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Protocal
+{
+
+    public class ProxyDic
+    {
+        public static Dictionary<Type, Type> dicProto = new Dictionary<Type, Type>();
+        public static List<Type> listProto = new List<Type>();
+        static ProxyDic()
+        { {% for key,data in datas.items() %}{% if data.resp %}
+            AddIfNotContains(typeof({{ data.name }}), typeof({{ data.resp }}));{% elif data.type == 'notice' %}
+            listProto.Add(typeof({{ data.name }}));{% endif %}{% endfor %}
+        }
+
+        private static void AddIfNotContains(Type typeTos, Type typeToc)
+        {
+            if (!dicProto.ContainsKey(typeTos))
+            {
+                dicProto.Add(typeTos, typeToc);
+            }
+        }
+
+        public static Type GetTocByTypeTos(Type typeTos)
+        {
+            Type typeToc = null;
+            if (dicProto.TryGetValue((typeTos), out typeToc))
+            {
+                return typeToc;
+            }
+            return null;
+        }
+        public static string GetTocNameByTypeTos(Type typeTos)
+        {
+            Type typeToc = null;
+            if (dicProto.TryGetValue((typeTos), out typeToc))
+            {
+
+            }
+
+            if (typeToc != null)
+            {
+                return typeToc.Name;
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+    }
+}

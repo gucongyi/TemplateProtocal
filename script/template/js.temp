@@ -1,0 +1,19 @@
+'use strict';
+
+{% for key,data in datas.items() %}{% if data.des %}
+/**
+ * {{ data.des }}
+ */{% endif %}
+class {{ data.name|first_upper }}{% if data.extends %} extends {{ data.extends}}{% endif %}
+{
+	constructor(obj)
+    {
+    	super(obj);{% for property in data.properties %}{% if property.des %}
+    	//{{ property.des }}{% endif %}
+    	this.{{ property.name }} = obj.{{ property.name }}{% endfor %}
+    }
+}
+{% endfor %}
+module.exports = { {% for key,data in datas.items() %}
+{{ data.name|first_upper }},{% endfor %}
+}

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<msgs package="" name="ProtoServerClass">
+    <class name="GoodInfoSign"  auth="" des="物品信息">
+        <field name="goodId" type="int" des="物品ID"/>
+        <field name="signState" type="SignState" des="签到状态"/>
+        <field name="whatDay" type="int" des="第几天"/>
+    </class>
+    <class name="ProtoServerBaseClass">
+    </class>
+    <class name="CSInfo"  auth="true" des="" extends="ProtoServerBaseClass">
+        <field name="listGoodInfoSign" type="List[GoodInfoSign]" des="" />
+        <field name="timeBegin" type="long" des="" />
+        <field name="timeEnd" type="long" des="" />
+    </class>
+    <req name="SCSignInfo" resp="RespSignInfo" auth="" des="服务器回给客户端的" extends="ProtoServerBaseClass">
+        <field name="listGoodInfoSign" type="List[GoodInfoSign]" des="物品信息List" />
+        <field name="timeBegin" type="long" des="" />
+        <field name="timeEnd" type="long" des="" />
+    </req>
+
+    <req name="CSGetInfo" resp="RespInfo" auth="" des="客户端向服务器请求的" extends="ProtoServerBaseClass">
+        <field name="day" type="int" des="" />
+    </req>
+    <resp name="RespInfo" type="notice">
+    	<field name="listGoodInfoSign" type="List[GoodInfoSign]" des="" />
+        <field name="timeBegin" type="long" des="" />
+        <field name="timeEnd" type="long" des="" />
+    </resp>
+
+    
+    
+    <enum name="SignState" resp="RespPlayerItems" auth="true" des="物品状态">
+        <field name="NormalSign" />
+        <field name="UnSign" />
+        <field name="RepairSign" des="补签" />
+    </enum>
+
+    <enum name="GoodType" auth="true" des="商城主分类">
+        <field name="Furniture" des="家具" />
+        <field name="Clothing" des="时装" />
+        <field name="Heartbeat" des="心动值" />
+    </enum>
+
+    <enum name="TitleType" resp="RespPlayerItems" auth="true">
+        <field name="TitleType1" des="" value="0" />
+        <field name="TitleType2" des="" />
+        <field name="TitleType3" des="" />
+        <field name="TitleType4" des="" />
+        <field name="TitleType5" des="" />
+    </enum>
+</msgs>

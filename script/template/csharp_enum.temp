@@ -1,0 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Protocal
+{ {% for key,data in datas.items() %}{% if data.des %}
+    /// <summary>
+    /// {{ data.des }}
+    /// </summary>{% endif %}
+    public enum {{ data.name|first_upper }}
+    { {% for property in data.properties %}
+        {{ property.name }}{% if property.value %} = {{ property.value }}{% endif %},{% if property.des %}//{{ property.des }}{% endif %} {% endfor %}
+    }
+    {% endfor %}
+}

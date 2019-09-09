@@ -1,0 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Protocal
+{ {% for key,data in datas.items() %}
+    {% if data.des %}
+    /**
+     * {{ data.des }}
+     */{% endif %}
+    public class {{ data.name|first_upper }}{% if data.extends %} : {{ data.extends}}{% endif %}
+    { {% for property in data.properties %}{% if property.des %}
+        //{{ property.des }}{% endif %}
+        public {{ property.type }} {{ property.name }};{% endfor %}
+    }
+    {% endfor %}
+}
