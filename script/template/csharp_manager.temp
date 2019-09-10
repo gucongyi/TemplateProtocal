@@ -27,7 +27,7 @@ namespace Protocal
         {% for key,data in datas.items() %}{% if data.resp %}
         public void Send{{ data.name }}({{ data.name }} {{ data.name|second_lower }}, Action<{{ data.resp }}> {{ data.resp }}CallBack, Action<ErrorInfo> errorCallBack,bool isShowDefalutTips=true)
         {
-            ProtocalComponent.SendMsg sendMsg = GetSendMsg<{{ data.name }}>(csSignInfo);
+            ProtocalComponent.SendMsg sendMsg = GetSendMsg<{{ data.name }}>({{ data.name|second_lower }});
             ProtoSendMethod.BusinessRequest<{{ data.resp }}>(sendMsg, {{ data.resp }}CallBack, errorCallBack, isShowDefalutTips);
         }
         {% endif %}{% endfor %}
