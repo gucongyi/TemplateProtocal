@@ -1,44 +1,47 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <msgs package="" name="ProtoServerClass">
-    <class name="GoodInfoSign"  auth="" des="物品信息">
+    <class name="GoodInfoSign" des="物品信息">
         <field name="goodId" type="int" des="物品ID"/>
-        <field name="signState" type="SignState" des="签到状态"/>
+        <field name="signState" type="EnumSignInfo" des="签到状态"/>
         <field name="whatDay" type="int" des="第几天"/>
     </class>
     <class name="ProtoServerBaseClass">
     </class>
-    <class name="CSInfo"  auth="true" des="" extends="ProtoServerBaseClass">
-        <field name="listGoodInfoSign" type="List[GoodInfoSign]" des="" />
-        <field name="timeBegin" type="long" des="" />
-        <field name="timeEnd" type="long" des="" />
+    <class name="TestInfo" des="" extends="ProtoServerBaseClass">
+        <field name="test1" type="int" des="" />
+        <field name="test2" type="long" des="" />
+        <field name="test3" type="string" des="" />
     </class>
-    <req name="SCSignInfo" resp="RespSignInfo" auth="" des="服务器回给客户端的" extends="ProtoServerBaseClass">
-        <field name="listGoodInfoSign" type="List[GoodInfoSign]" des="物品信息List" />
-        <field name="timeBegin" type="long" des="" />
-        <field name="timeEnd" type="long" des="" />
+    <req name="CSSignInfo" resp="RespSignInfo" des="服务器回给客户端的" extends="ProtoServerBaseClass">
     </req>
 
-    <req name="CSGetInfo" resp="RespInfo" auth="" des="客户端向服务器请求的" extends="ProtoServerBaseClass">
+    <req name="CSGetInfo" resp="RespInfo" des="客户端向服务器请求的" extends="ProtoServerBaseClass">
         <field name="day" type="int" des="" />
     </req>
-    <resp name="RespInfo" type="notice">
+    <resp name="RespInfo" type="">
+    	<field name="testInfo" type="TestInfo" des="" />
+    </resp>
+	<resp name="RespSignInfo" type="">
     	<field name="listGoodInfoSign" type="List[GoodInfoSign]" des="" />
         <field name="timeBegin" type="long" des="" />
         <field name="timeEnd" type="long" des="" />
     </resp>
-    <enum name="SignState" resp="RespPlayerItems" auth="true" des="物品状态">
+	<resp name="RespInfo" type="notice">
+    	<field name="testInfo" type="TestInfo" des="" />
+    </resp>
+    <enum name="EnumSignInfo" des="物品状态">
         <field name="NormalSign" />
         <field name="UnSign" />
         <field name="RepairSign" des="补签" />
     </enum>
 
-    <enum name="GoodType" auth="true" des="商城主分类">
+    <enum name="EnumGoodType" des="商城主分类">
         <field name="Furniture" des="家具" />
         <field name="Clothing" des="时装" />
         <field name="Heartbeat" des="心动值" />
     </enum>
 
-    <enum name="TitleType" resp="RespPlayerItems" auth="true">
+    <enum name="EnumTitleType" des="">
         <field name="TitleType1" des="" value="0" />
         <field name="TitleType2" des="" />
         <field name="TitleType3" des="" />
