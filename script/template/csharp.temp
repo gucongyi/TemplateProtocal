@@ -16,4 +16,9 @@ namespace Protocal
         public {{ property.type }} {{ property.name }};{% endfor %}
     }
     {% endfor %}
+	public class ErrorInfo
+	{
+		public int errorCode;
+		public string errorMsg;
+	}
 }
