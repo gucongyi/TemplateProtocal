@@ -29,7 +29,14 @@
     <!-- enum定义 -->
 
     <!-- class定义 -->
-    <class name="ProtoServerBaseClass" des="请求基类">
+	<class name="MsgRequest" des="请求基类">
+    </class>
+	<class name="MsgResponse" des="回应基类">
+		<field name="nameClass" type="string" des="" />
+    </class>
+    <class name="ServerInfo" des="服务器给客户端的信息格式">
+        <field name="code" type="int" des="错误码" />
+        <field name="data" type="string" des="实际信息" />
     </class>
 
     <class name="GoodInfoSign" des="签到物品信息">
@@ -52,13 +59,15 @@
     <!-- class定义 -->
 
     <!-- 请求定义 -->
-    <req name="CSLoginCloud" resp="SCLoginCloud" des="请求登录云引擎" extends="ProtoServerBaseClass">
+	<req name="CSHeart" resp="SCHeart" des="心跳协议" extends="MsgRequest">
+    </req>
+    <req name="CSLoginCloud" resp="SCLoginCloud" des="请求登录云引擎" extends="MsgRequest">
     </req>
 
-    <req name="CSSignInfo" resp="SCSignInfo" des="请求签到信息" extends="ProtoServerBaseClass">
+    <req name="CSSignInfo" resp="SCSignInfo" des="请求签到信息" extends="MsgRequest">
     </req>
 
-    <req name="CSSign" resp="SCSign" des="请求签到" extends="ProtoServerBaseClass">
+    <req name="CSSign" resp="SCSign" des="请求签到" extends="MsgRequest">
         <field name="isRepair" type="bool" des="是否是补签" />
         <field name="whatDay" type="int" des="第几天" />
     </req>
@@ -66,17 +75,20 @@
     <!-- 请求定义 -->
     
     <!-- 回复定义 -->
-    <resp name="SCLoginCloud" des="回复登录云引擎"> 
+	<resp name="SCHeart" des="心跳回复，多条" extends="MsgResponse"> 
+        <field name="heartInfo" type="List[MsgResponse]" des="多条的心跳" />
+    </resp>
+    <resp name="SCLoginCloud" des="回复登录云引擎" extends="MsgResponse"> 
         <field name="curServerTime" type="long" des="当前服务器时间" />
     </resp>
 
-    <resp name="SCSignInfo" des="回复签到信息">
+    <resp name="SCSignInfo" des="回复签到信息" extends="MsgResponse">
         <field name="listGoodInfoSign" type="List[GoodInfoSign]" des="" />
         <field name="timeBegin" type="long" des="开始时间" />
     	<field name="timeEnd" type="long" des="结束时间" />
     </resp>
 
-    <resp name="SCSign" des="回复签到"> 
+    <resp name="SCSign" des="回复签到" extends="MsgResponse"> 
         <field name="yingHuaBi" type="int" des="当前樱花币数量" />
     </resp>
     <!-- 回复定义 -->
