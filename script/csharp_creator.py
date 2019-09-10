@@ -39,6 +39,7 @@ def create_server():
         if k is 'resp':
             for key, value in v.items():
                 req_dict.setdefault(key, value)
+                class_dict.setdefault(key, value)
         if k is 'enum':
             for key, value in v.items():
                 enum_dict.setdefault(key, value)
