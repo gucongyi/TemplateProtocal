@@ -71,7 +71,6 @@
         <field name="isRepair" type="bool" des="是否是补签" />
         <field name="whatDay" type="int" des="第几天" />
     </req>
-
     <!-- 请求定义 -->
     
     <!-- 回复定义 -->

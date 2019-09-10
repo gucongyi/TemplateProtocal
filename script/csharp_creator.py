@@ -31,11 +31,13 @@ def create_server():
     class_dict = {}
     req_dict = {}
     enum_dict = {}
+    manager_dict = {}
     for (k, v) in pojo_map.items():
         if k is 'req':
             for key, value in v.items():
                 class_dict.setdefault(key, value)
                 req_dict.setdefault(key, value)
+                manager_dict.setdefault(key, value)
         if k is 'resp':
             for key, value in v.items():
                 req_dict.setdefault(key, value)
@@ -75,6 +77,14 @@ def create_server():
             pojo_server_file = template_bean_server.render(enum_dict_plus)
             out_file.write(pojo_server_file)
             print('create pojo ProtoServerEnum.cs success')
+    if manager_dict:
+        manager_dict_plus = {}
+        manager_dict_plus['datas'] = manager_dict
+        template_bean_server = environment.get_template('csharp_manager.temp')
+        with open(outpath + 'ProtocalManager.cs', 'w', encoding='utf-8') as out_file:
+            pojo_server_file = template_bean_server.render(manager_dict_plus)
+            out_file.write(pojo_server_file)
+            print('create pojo ProtocalManager.cs success')
 
 if __name__ == '__main__':
     try:

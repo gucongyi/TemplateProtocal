@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+using ETHotfix;
+
+namespace Protocal
+{
+    public class ProtocalManager
+    {
+        private static ProtocalManager _instance;
+        private ProtocalManager() { }
+
+        public static ProtocalManager Instance()
+        {
+            if (_instance==null)
+            {
+                _instance = new ProtocalManager();
+            }
+            return _instance;
+        }
+
+        public void SendHeart(Action<SCHeart> OnSuccess)
+        {
+            ZLog.Info($"<color=yellow>·¢ËÍÐÄÌø</color>");
+            ProtoSendMethod.HeartRequest(OnSuccess);
+        }
+
+        {% for key,data in datas.items() %}{% if data.resp %}
+        public void Send{{ data.name }}({{ data.name }} csSignInfo, Action<{{ data.resp }}> {{ data.resp }}CallBack, Action<ErrorInfo> errorCallBack,bool isShowDefalutTips=true)
+        {
+            ProtocalComponent.SendMsg sendMsg = GetSendMsg<{{ data.name }}>(csSignInfo);
+            ProtoSendMethod.BusinessRequest<{{ data.resp }}>(sendMsg, {{ data.resp }}CallBack, errorCallBack, isShowDefalutTips);
+        }
+        {% endif %}{% endfor %}
+
+        private static ProtocalComponent.SendMsg GetSendMsg<T>(CSSignInfo csSignInfo) where T: MsgRequest
+        {
+            ProtocalComponent.SendMsg sendMsg = new ProtocalComponent.SendMsg();
+            sendMsg.msgName = csSignInfo.ToString();
+            int endDotIndex = sendMsg.msgName.LastIndexOf(".");
+            sendMsg.msgName = sendMsg.msgName.Substring(endDotIndex+1);
+            sendMsg.msg = csSignInfo;
+            return sendMsg;
+        }
+
+    }
+}

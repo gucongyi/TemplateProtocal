@@ -7,8 +7,7 @@
 exports.{{ data.name|first_upper }} = class {{ data.name|first_upper }}
 {
 	constructor(obj)
-    {
-    	{% if data.properties %}
+    { {% if data.properties %}{% if data.resp %}
     	try {
             //检查参数是否异常
             if({% for property in data.properties %}obj.{{ property.name }} == null{% if not loop.last %}
@@ -23,7 +22,10 @@ exports.{{ data.name|first_upper }} = class {{ data.name|first_upper }}
         } catch (error) {
             throw error;
         }
-        {% endif %}
+        {% else %}
+        {% for property in data.properties %}{% if property.des %}
+        //{{ property.des }}{% endif %}
+        this.{{ property.name }} = obj.{{ property.name }}{% endfor %}{% endif %}{% endif %}
     }
 }
 {% endfor %}
