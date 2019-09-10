@@ -58,22 +58,22 @@ def create_server():
             pojo_server_file = template_bean_server.render(class_dict_plus)
             out_file.write(pojo_server_file)
             print('create pojo ProtoServerClass.js success')
-    # if req_dict:
-    #     req_dict_plus = {}
-    #     req_dict_plus['datas'] = req_dict
-    #     template_bean_server = environment.get_template('csharp_dic.temp')
-    #     with open(outpath + 'ProtoServerDic.cs', 'w', encoding='utf-8') as out_file:
-    #         pojo_server_file = template_bean_server.render(req_dict_plus)
-    #         out_file.write(pojo_server_file)
-    #         print('create pojo ProtoServerDic.cs success')
-    # if enum_dict:
-    #     enum_dict_plus = {}
-    #     enum_dict_plus['datas'] = enum_dict
-    #     template_bean_server = environment.get_template('csharp_enum.temp')
-    #     with open(outpath + 'ProtoServerEnum.cs', 'w', encoding='utf-8') as out_file:
-    #         pojo_server_file = template_bean_server.render(enum_dict_plus)
-    #         out_file.write(pojo_server_file)
-    #         print('create pojo ProtoServerEnum.cs success')
+    if req_dict:
+        req_dict_plus = {}
+        req_dict_plus['datas'] = req_dict
+        template_bean_server = environment.get_template('js_code.temp')
+        with open(outpath + 'ProtoServerCode.js', 'w', encoding='utf-8') as out_file:
+            pojo_server_file = template_bean_server.render(req_dict_plus)
+            out_file.write(pojo_server_file)
+            print('create pojo ProtoServerCode.js success')
+    if enum_dict:
+        enum_dict_plus = {}
+        enum_dict_plus['datas'] = enum_dict
+        template_bean_server = environment.get_template('js_enum.temp')
+        with open(outpath + 'ProtoServerEnum.js', 'w', encoding='utf-8') as out_file:
+            pojo_server_file = template_bean_server.render(enum_dict_plus)
+            out_file.write(pojo_server_file)
+            print('create pojo ProtoServerEnum.js success')
 
 if __name__ == '__main__':
     try:
