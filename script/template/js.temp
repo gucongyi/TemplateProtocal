@@ -8,7 +8,7 @@ exports.{{ data.name|first_upper }} = class {{ data.name|first_upper }}
 {
 	constructor(obj)
     {
-    	{% if data.name != 'ProtoServerBaseClass' %}
+    	{% if data.properties %}
     	try {
             //检查参数是否异常
             if({% for property in data.properties %}obj.{{ property.name }} == null{% if not loop.last %}

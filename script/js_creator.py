@@ -16,7 +16,7 @@ def create_server():
     root.withdraw()
 
     # 从文件中获取路径
-    f = codecs.open('../config/outpath.txt', 'r', 'utf-8', buffering=True)
+    f = codecs.open('../config/outpath_js.txt', 'r', 'utf-8', buffering=True)
     outpath = f.read()
     f.close()
     outpath = outpath.strip("/") + '/'

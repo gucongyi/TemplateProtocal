@@ -1,62 +1,94 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <msgs package="" name="ProtoServerClass">
-    <class name="GoodInfoSign" des="物品信息">
-        <field name="goodId" type="int" des="物品ID"/>
-        <field name="signState" type="EnumSignInfo" des="签到状态"/>
-        <field name="whatDay" type="int" des="第几天"/>
-    </class>
-    <class name="ProtoServerBaseClass">
-    </class>
-    <class name="TestInfo" des="" extends="ProtoServerBaseClass">
-        <field name="test1" type="int" des="" />
-        <field name="test2" type="long" des="" />
-        <field name="test3" type="string" des="" />
-    </class>
-    <req name="CSSignInfo" resp="RespSignInfo" des="服务器回给客户端的" extends="ProtoServerBaseClass">
-    </req>
-
-    <req name="CSGetInfo" resp="RespInfo" des="客户端向服务器请求的" extends="ProtoServerBaseClass">
-        <field name="day" type="int" des="" />
-    </req>
-    <resp name="RespInfo" type="">
-    	<field name="testInfo" type="TestInfo" des="" />
-    </resp>
-	<resp name="RespSignInfo" type="">
-    	<field name="listGoodInfoSign" type="List[GoodInfoSign]" des="" />
-        <field name="timeBegin" type="long" des="" />
-        <field name="timeEnd" type="long" des="" />
-    </resp>
-	<resp name="RespInfo" type="notice">
-    	<field name="testInfo" type="TestInfo" des="" />
-    </resp>
-    <enum name="EnumSignInfo" des="物品状态">
-        <field name="NormalSign" />
-        <field name="UnSign" />
+    <!-- enum定义 -->
+    <enum name="SignState" des="签到状态">
+        <field name="NormalSign" des="正常签到" />
+        <field name="UnSign" des="未签到" />
         <field name="RepairSign" des="补签" />
     </enum>
 
-    <enum name="EnumGoodType" des="商城主分类">
+    <enum name="GoodType" des="商城主分类">
+        <field name="YingHuaBi" des="樱花币" />
         <field name="Furniture" des="家具" />
-        <field name="Clothing" des="时装" />
         <field name="Heartbeat" des="心动值" />
+        <field name="Exchange" des="兑换" />
     </enum>
 
-    <enum name="EnumTitleType" des="">
+    <enum name="TitleType" des="称号类型">
         <field name="TitleType1" des="" value="0" />
-        <field name="TitleType2" des="" />
-        <field name="TitleType3" des="" />
-        <field name="TitleType4" des="" />
-        <field name="TitleType5" des="" />
+        <field name="TitleType2" des="" value="1" />
+        <field name="TitleType3" des="" value="2" />
     </enum>
 
-    <!-- 所有成功均返回value:0 -->
+    <enum name="FriendVisitType" des="访问类型">
+        <field name="None" des="啥也没干，只是来看了一下" value="0" />
+        <field name="Sweep" des="打扫" value="1" />
+        <field name="Agree" des="点赞" value="2" />
+        <field name="Donate" des="赠送" value="3" />
+    </enum>
+    <!-- enum定义 -->
+
+    <!-- class定义 -->
+    <class name="ProtoServerBaseClass" des="请求基类">
+    </class>
+
+    <class name="GoodInfoSign" des="签到物品信息">
+        <field name="goodId" type="int" des="物品id"/>
+        <field name="signState" type="SignState" des="签到状态"/>
+        <field name="whatDay" type="int" des="第几天"/>
+    </class>
+
+    <class name="GoodInfo" des="物品信息">
+        <field name="goodId" type="int" des="物品id"/>
+        <field name="shopType" type="GoodType" des="货物类型"/>
+        <field name="itemId" type="int" des="对应道具Id"/>
+        <field name="haveCount" type="int" des="拥有数量  数量限额99"/>
+        <field name="goodPrice" type="int" des="货物价格"/>
+        <field name="uptime" type="int" des="物品上线时间"/>
+        <field name="isPromotion" type="bool" des="物品是否促销"/>
+        <field name="timeBegin" type="long" des="限时促销开始时间"/>
+        <field name="timeEnd" type="long" des="限时促销结束时间"/>
+    </class>
+    <!-- class定义 -->
+
+    <!-- 请求定义 -->
+    <req name="CSLoginCloud" resp="SCLoginCloud" des="请求登录云引擎" extends="ProtoServerBaseClass">
+    </req>
+
+    <req name="CSSignInfo" resp="SCSignInfo" des="请求签到信息" extends="ProtoServerBaseClass">
+    </req>
+
+    <req name="CSSign" resp="SCSign" des="请求签到" extends="ProtoServerBaseClass">
+        <field name="isRepair" type="bool" des="是否是补签" />
+        <field name="whatDay" type="int" des="第几天" />
+    </req>
+
+    <!-- 请求定义 -->
+    
+    <!-- 回复定义 -->
+    <resp name="SCLoginCloud" des="回复登录云引擎"> 
+        <field name="curServerTime" type="long" des="当前服务器时间" />
+    </resp>
+
+    <resp name="SCSignInfo" des="回复签到信息">
+        <field name="listGoodInfoSign" type="List[GoodInfoSign]" des="" />
+        <field name="timeBegin" type="long" des="开始时间" />
+    	<field name="timeEnd" type="long" des="结束时间" />
+    </resp>
+
+    <resp name="SCSign" des="回复签到"> 
+        <field name="yingHuaBi" type="int" des="当前樱花币数量" />
+    </resp>
+    <!-- 回复定义 -->
+
+    <!-- 错误码定义 所有成功均返回value:0 -->
     <class name="ProxyDicCode" type="CodeError" des="协议码">
         <field name="Success" msg="成功" value="0" />
-
         <field name="User_UnLogin" msg="用户未登录"  value="1" />
         <field name="Sign_ParamException" msg="签到参数异常"  value="101" />
         <field name="Sign_Signed" msg="已签到"  value="102" />
         <field name="Sign_RepairSigned" msg="已补签"  value="103" />
         <field name="Sign_NotInSignTime" msg="不在签到时间范围内"  value="104" />
     </class>
+    <!-- 错误码定义 -->
 </msgs>

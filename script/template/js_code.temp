@@ -1,0 +1,8 @@
+'use strict';
+
+{% for key,data in datas.items() %}{% if data.type == 'CodeError' %}{% if data.des %}
+//{{ data.des }}{% endif %}
+{% for property in data.properties %}{% if property.msg %}
+/** {{ property.msg }} */{% endif %}
+exports.{{ property.name }} = {{ property.value }};{% endfor %}{% endif %}
+{% endfor %}
