@@ -20,12 +20,12 @@ namespace Protocal
 
         public void SendHeart(Action<SCHeart> OnSuccess)
         {
-            ZLog.Info($"<color=yellow>·¢ËÍÐÄÌø</color>");
+            ZLog.Info($"<color=yellow>SendHeart Begin</color>");
             ProtoSendMethod.HeartRequest(OnSuccess);
         }
 
         {% for key,data in datas.items() %}{% if data.resp %}
-        public void Send{{ data.name }}({{ data.name }} csSignInfo, Action<{{ data.resp }}> {{ data.resp }}CallBack, Action<ErrorInfo> errorCallBack,bool isShowDefalutTips=true)
+        public void Send{{ data.name }}({{ data.name }} {{ data.name|second_lower }}, Action<{{ data.resp }}> {{ data.resp }}CallBack, Action<ErrorInfo> errorCallBack,bool isShowDefalutTips=true)
         {
             ProtocalComponent.SendMsg sendMsg = GetSendMsg<{{ data.name }}>(csSignInfo);
             ProtoSendMethod.BusinessRequest<{{ data.resp }}>(sendMsg, {{ data.resp }}CallBack, errorCallBack, isShowDefalutTips);
