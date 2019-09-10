@@ -32,13 +32,13 @@ namespace Protocal
         }
         {% endif %}{% endfor %}
 
-        private static ProtocalComponent.SendMsg GetSendMsg<T>(CSSignInfo csSignInfo) where T: MsgRequest
+        private static ProtocalComponent.SendMsg GetSendMsg<T>(T csInfo) where T: MsgRequest
         {
             ProtocalComponent.SendMsg sendMsg = new ProtocalComponent.SendMsg();
-            sendMsg.msgName = csSignInfo.ToString();
+            sendMsg.msgName = csInfo.ToString();
             int endDotIndex = sendMsg.msgName.LastIndexOf(".");
             sendMsg.msgName = sendMsg.msgName.Substring(endDotIndex+1);
-            sendMsg.msg = csSignInfo;
+            sendMsg.msg = csInfo;
             return sendMsg;
         }
 
