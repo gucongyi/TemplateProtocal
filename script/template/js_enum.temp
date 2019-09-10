@@ -3,6 +3,6 @@
 //枚举
 {% for key,data in datas.items() %}{% if data.des %}
 // {{ data.des }} {{ data.name|first_upper }}{% endif %}{% for property in data.properties %}
-exports.{{ property.name }} = {% if property.value %}{{ property.value|int }}{% else %}{{ loop.index-1 }}{% endif %};{% if property.des %}//{{ property.des }}{% endif %}{% endfor %}
+exports.{{ data.name|first_upper }}_{{ property.name }} = {% if property.value %}{{ property.value|int }}{% else %}{{ loop.index-1 }}{% endif %};{% if property.des %}//{{ property.des }}{% endif %}{% endfor %}
 {% endfor %}
 
