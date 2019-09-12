@@ -7,11 +7,18 @@
         <field name="RepairSign" des="补签" />
     </enum>
 
-    <enum name="GoodType" des="商城主分类">
+    <enum name="ShopType" des="商城主分类">
         <field name="YingHuaBi" des="樱花币" />
         <field name="Furniture" des="家具" />
         <field name="Heartbeat" des="心动值" />
         <field name="Exchange" des="兑换" />
+    </enum>
+
+    <enum name="GoodType" des="物品分类">
+        <field name="Furniture_Chair" des="家具 椅子" />
+        <field name="Furniture_Table" des="家具 桌子" />
+        <field name="Clothing_Overcoat" des="时装 外套" />
+        <field name="Clothing_Shoes" des="时装 鞋子" />
     </enum>
 
     <enum name="TitleType" des="称号类型">
@@ -20,7 +27,7 @@
         <field name="TitleType3" des="" value="2" />
     </enum>
 
-    <enum name="FriendVisitType" des="访问类型">
+    <enum name="FriendInteractType" des="互动类型">
         <field name="None" des="啥也没干，只是来看了一下" value="0" />
         <field name="Sweep" des="打扫" value="1" />
         <field name="Agree" des="点赞" value="2" />
@@ -28,68 +35,173 @@
     </enum>
     <!-- enum定义 -->
 
+
     <!-- class定义 -->
 	<class name="MsgRequest" des="请求基类">
     </class>
+
 	<class name="MsgResponse" des="回应基类">
 		<field name="nameClass" type="string" des="" />
     </class>
+
     <class name="ServerInfo" des="服务器给客户端的信息格式">
         <field name="code" type="int" des="错误码" />
         <field name="data" type="string" des="实际信息" />
     </class>
 
-    <class name="GoodInfoSign" des="签到物品信息">
-        <field name="goodId" type="int" des="物品id"/>
-        <field name="signState" type="SignState" des="签到状态"/>
-        <field name="whatDay" type="int" des="第几天"/>
+    <class name="GoodsItem" des="互动道具">
+        <field name="itemId" type="int" des="道具id"/>
+        <field name="itemCount" type="int" des="道具数量"/>
     </class>
 
-    <class name="GoodInfo" des="物品信息">
-        <field name="goodId" type="int" des="物品id"/>
-        <field name="shopType" type="GoodType" des="货物类型"/>
-        <field name="itemId" type="int" des="对应道具Id"/>
-        <field name="haveCount" type="int" des="拥有数量  数量限额99"/>
-        <field name="goodPrice" type="int" des="货物价格"/>
-        <field name="uptime" type="int" des="物品上线时间"/>
-        <field name="isPromotion" type="bool" des="物品是否促销"/>
-        <field name="timeBegin" type="long" des="限时促销开始时间"/>
-        <field name="timeEnd" type="long" des="限时促销结束时间"/>
+    <class name="PlayerDataSimple" des="人物简单信息">
+        <field name="playerId" type="int" des="玩家id"/>
+        <field name="nickname" type="string" des="昵称"/>
+        <field name="vipLevel" type="int" des="vip等级"/>
+        <field name="titleType" type="int" des="称号类型"/>
+        <field name="friendlyValue" type="int" des="好友度"/>
+        <field name="headIcon" type="string" des="头像"/>
     </class>
+
+    <class name="UserInfo" des="用户信息">
+        <!-- 等待添加 -->
+        <field name="lastLoginCloudTime" type="long" des="最后登录时间戳"/>
+        <field name="yingHuaBi" type="long" des="樱花币"/>
+        <field name="signInfo" type="List[GoodInfoSign]" des="签到配置"/>
+        <field name="playerInfo" type="PlayerDataSimple" des="玩家信息"/>
+        <field name="listFriend" type="List[PlayerDataSimple]" des="好友列表"/>
+        <field name="listFriendApply" type="List[PlayerDataSimple]" des="好友申请列表"/>
+        <field name="listBag" type="List[GoodsItem]" des="背包信息"/>
+    </class>
+
+    <class name="FriendVisitRecord" des="访客记录">
+        <field name="playerId" type="int" des="玩家id"/>
+        <field name="nickname" type="string" des="昵称"/>
+        <field name="desc" type="string" des="访问时间戳"/>
+        <field name="visitTime" type="long" des="最后登录时间戳"/>
+        <field name="friendInteractType" type="FriendInteractType" des="互动类型"/>
+    </class>
+
     <!-- class定义 -->
+
 
     <!-- 请求定义 -->
 	<req name="CSHeart" resp="SCHeart" des="心跳协议" extends="MsgRequest">
     </req>
+
     <req name="CSLoginCloud" resp="SCLoginCloud" des="请求登录云引擎" extends="MsgRequest">
     </req>
 
-    <req name="CSSignInfo" resp="SCSignInfo" des="请求签到信息" extends="MsgRequest">
+    <req name="CSSignInfo" resp="SCSignInfo" des="请求签到信息">
     </req>
 
     <req name="CSSign" resp="SCSign" des="请求签到" extends="MsgRequest">
         <field name="isRepair" type="bool" des="是否是补签" />
+        <field name="goodId" type="list[int]" des="商品id" />
         <field name="whatDay" type="int" des="第几天" />
     </req>
+
+    <!-- 好友 -->
+    <req name="CSFriendList" resp="SCFriendList" des="请求好友列表" extends="MsgRequest">
+    </req>
+
+    <req name="CSFriendListRecommend" resp="SCFriendListRecommend" des="请求好友列表推荐" extends="MsgRequest">
+    </req>
+
+    <req name="CSFriendListApply" resp="SCFriendListApply" des="请求申请添加好友列表" extends="MsgRequest">
+    </req>
+
+    <req name="CSFriendDelete" resp="SCFriendDelete" des="请求删除好友" extends="MsgRequest">
+        <field name="listPlayerId" type="List[string]" des="需要删除的好友id" />
+    </req>
+
+    <req name="CSFriendAddApply" resp="SCFriendAddApply" des="请求申请添加好友" >
+        <field name="listPlayerId" type="List[string]" des="申请的玩家id" />
+    </req>
+
+    <req name="CSFriendAddAgree" resp="SCFriendAddAgree" des="请求同意添加好友">
+        <field name="listPlayerId" type="List[string]" des="同意添加的玩家id" />
+    </req>
+
+    <req name="CSFriendRefuse" resp="SCFriendRefuse" des="拒绝添加好友">
+        <field name="listPlayerId" type="List[string]" des="拒绝的玩家id" />
+    </req>
+
+    <req name="CSFriendSearch" resp="SCFriendSearch" des="请求搜索玩家">
+        <field name="keyword" type="string" des="搜索关键字" />
+    </req>
+
+    <req name="CSFriendVisitRecordList" resp="SCFriendVisitRecordList" des="请求玩家访问记录列表">
+    </req>
+
+    <req name="CSFriendDonate" resp="SCFriendDonate" des="申请好友赠送">
+        <field name="playerId" type="string" des="好友id"/>
+        <field name="listGoods" type="List[GoodsItem]" des="赠送的物品列表"/>
+    </req>
+
+    <req name="CSFriendInteract" resp="SCFriendInteract" des="申请好友互动">
+        <field name="playerId" type="int" des="好友id"/>
+        <field name="friendInteractType" type="FriendInteractType" des="好友互动类型"/>
+    </req>
+    <!-- 好友 -->
     <!-- 请求定义 -->
     
+
     <!-- 回复定义 -->
 	<resp name="SCHeart" des="心跳回复，多条" extends="MsgResponse"> 
         <field name="heartInfo" type="List[MsgResponse]" des="多条的心跳" />
     </resp>
+
+    <resp name="SCRenewGame" des="回复游戏更新" extends="MsgResponse"></resp>
+
     <resp name="SCLoginCloud" des="回复登录云引擎" extends="MsgResponse"> 
         <field name="curServerTime" type="long" des="当前服务器时间" />
+        <field name="userInfo" type="UserInfo" des="用户信息" />
     </resp>
 
-    <resp name="SCSignInfo" des="回复签到信息" extends="MsgResponse">
-        <field name="listGoodInfoSign" type="List[GoodInfoSign]" des="" />
-        <field name="timeBegin" type="long" des="开始时间" />
-    	<field name="timeEnd" type="long" des="结束时间" />
+    <resp name="SCSignInfo" des="回复签到信息">
+        <field name="listGoodInfoSign" type="List[GoodInfoSign]" des="签到信息列表" />
     </resp>
 
-    <resp name="SCSign" des="回复签到" extends="MsgResponse"> 
-        <field name="yingHuaBi" type="int" des="当前樱花币数量" />
+    <resp name="SCSign" des="回复签到(Code码)" extends="MsgResponse"> 
     </resp>
+
+    <!-- 好友 -->
+    <resp name="SCFriendList" des="回复好友列表">
+        <field name="listFriend" type="List[PlayerDataSimple]" des="好友列表" />
+    </resp>
+
+    <resp name="SCFriendListRecommend" des="回复好友列表推荐">
+        <field name="listRecommend" type="List[PlayerDataSimple]" des="推荐列表" />
+    </resp>
+
+    <resp name="scFriendListApply" des="回复申请添加好友列表">
+        <field name="listApply" type="List[PlayerDataSimple]" des="回复申请添加好友列表" />
+    </resp>
+
+    <resp name="SCFriendDelete" des="回复好友删除(Code码)">
+    </resp>
+
+    <resp name="SCFriendAddApply" des="回复添加好友申请(Code码)">
+    </resp>
+
+    <resp name="SCFriendAddAgree" des="回复同意添加好友(Code码)">
+    </resp>
+
+    <resp name="SCFriendRefuse" des="回复拒绝添加好友(Code码)">
+    </resp>
+
+    <resp name="SCFriendSearch" des="回复搜索的玩家信息">
+        <field name="listPlayerDataSimple" type="List[PlayerDataSimple]" des="回复申请添加好友列表" />
+    </resp>
+
+    <resp name="SCFriendVisitRecordList" des="回复玩家访客记录列表">
+        <field name="listFriendVisitRecords" type="List[FriendVisitRecord]" des="访客记录列表" />
+    </resp>
+
+    <resp name="SCFriendDonate" des="回复好友互动(Code码)">
+    </resp>
+    <!-- 好友 -->
     <!-- 回复定义 -->
 
     <!-- 错误码定义 所有成功均返回value:0 -->
