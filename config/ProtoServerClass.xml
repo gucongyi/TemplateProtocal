@@ -65,10 +65,11 @@
   <class name="PlayerDataSimple" des="人物简单信息">
         <field name="playerId" type="int" des="玩家id"/>
         <field name="nickname" type="string" des="昵称"/>
-        <field name="vipLevel" type="int" des="vip等级"/>
+        <field name="isVip" type="bool" des="是否vip"/>
         <field name="titleType" type="int" des="称号类型"/>
-        <field name="friendlyValue" type="int" des="好友度"/>
         <field name="headIcon" type="string" des="头像"/>
+        <field name="isFriend" type="bool" des="是否好友"/>
+        <field name="friendlyValue" type="int" des="好友度"/>
     </class>
 
     <class name="UserInfo" des="用户信息">
@@ -90,6 +91,7 @@
         <field name="friendInteractType" type="FriendInteractType" des="互动类型"/>
         <field name="goodId" type="int" des="物品id"/>
         <field name="goodCount" type="int" des="物品数量"/>
+        <field name="isReply" type="bool" des="是否回复"/>
     </class>
 
     <class name="GoodInfo" des="商品信息">
@@ -124,6 +126,10 @@
     </req>
 
     <!-- 好友 -->
+    <req name="CSPlayerInfo" resp="SCPlayerInfo" des="请求玩家信息" extends="MsgRequest">
+        <field name="listPlayerId" type="List[string]" des="玩家id" />
+    </req>
+
     <req name="CSFriendList" resp="SCFriendList" des="请求好友列表" extends="MsgRequest">
     </req>
 
@@ -213,6 +219,10 @@
     </resp>
 
     <!-- 好友 -->
+    <resp name="SCPlayerInfo" des="回复玩家信息" extends="MsgResponse">
+        <field name="listPlayerInfo" type="List[PlayerDataSimple]" des="玩家信息" />
+    </resp>
+
     <resp name="SCFriendList" des="回复好友列表" extends="MsgResponse">
         <field name="listFriend" type="List[PlayerDataSimple]" des="好友列表" />
     </resp>
@@ -274,6 +284,9 @@
     <!-- 错误码定义 所有成功均返回value:0 -->
     <class name="ProxyDicCode" type="CodeError" des="协议码">
         <field name="Success" msg="成功" value="0" />
+        <field name="Fail" msg="失败" value="2" />
+        <field name="CS_ParamException" msg="请求参数异常"  value="101" />
+
         <field name="User_UnLogin" msg="用户未登录"  value="1" />
         <field name="Sign_ParamException" msg="签到参数异常"  value="101" />
         <field name="Sign_Signed" msg="已签到"  value="102" />
