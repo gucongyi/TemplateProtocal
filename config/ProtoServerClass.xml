@@ -57,6 +57,7 @@
   <class name="GoodInfoSign" des="签到物品信息">
     <field name="goodId" type="int" des="道具id"/>
     <field name="signState" type="SignState" des="签到状态"/>
+    <field name="vip" type="bool" des="是否vip双倍"/>
     <field name="whatDay" type="int" des="第几天"/>
   </class>
   <class name="PlayerDataSimple" des="人物简单信息">
@@ -87,6 +88,18 @@
         <field name="friendInteractType" type="FriendInteractType" des="互动类型"/>
     </class>
 
+    <class name="GoodInfo" des="商品信息">
+        <field name="goodId" type="int" des="商品id"/>
+        <field name="shopType" type="ShopType" des="商品类型"/>
+        <field name="goodType" type="GoodType" des="物品类型"/>
+        <field name="itemId" type="int" des="对应道具Id"/>
+        <field name="haveCount" type="int" des="拥有数量  数量限额99"/>
+        <field name="goodPrice" type="int" des="货物价格"/>
+        <field name="uptime" type="long" des="物品上线时间"/>
+        <field name="isPromotion" type="bool" des="物品是否促销"/>
+        <field name="timeBegin" type="long" des="限时促销开始时间"/>
+        <field name="timeEnd" type="long" des="限时促销结束时间"/>
+    </class>
     <!-- class定义 -->
 
 
@@ -150,6 +163,7 @@
     </req>
     <!-- 好友 -->
 
+    <!-- 商城 -->
     <req name="CSBuyGoods" resp="SCBuyGoods" des="申请购买物品" extends="MsgRequest">
         <field name="goodsItem" type="List[GoodsItem]" des="购买的物品"/>
     </req>
@@ -157,6 +171,14 @@
     <req name="CSExchangeGood" resp="SCExchangeGood" des="申请兑换物品" extends="MsgRequest">
         <field name="exchangeCode" type="string" des="兑换码"/>
     </req>
+
+    <req name="CSShopInfo" resp="SCShopInfo" des="申请商城信息" extends="MsgRequest">
+    </req>
+
+    <req name="CSGoodInfo" resp="SCGoodInfo" des="申请商品信息" extends="MsgRequest">
+        <field name="goodId" type="list[int]" des="商品id"/>
+    </req>
+    <!-- 商城 -->
     <!-- 请求定义 -->
     
 
@@ -225,6 +247,14 @@
 
     <resp name="SCExchangeGood" des="回复兑换物品" extends="MsgResponse">
         <field name="goodsItem" type="List[GoodsItem]" des="兑换的物品" />
+    </resp>
+
+    <resp name="SCShopInfo" des="回复商城信息" extends="MsgResponse">
+        <field name="listGoodInfo" type="List[GoodInfo]" des="商品列表"/>
+    </resp>
+
+    <resp name="SCGoodInfo" des="回复商品信息" extends="MsgResponse">
+        <field name="listGoodInfo" type="List[GoodInfo]" des="商品列表"/>
     </resp>
     <!-- 好友 -->
     <!-- 回复定义 -->
