@@ -92,7 +92,7 @@
     <req name="CSLoginCloud" resp="SCLoginCloud" des="请求登录云引擎" extends="MsgRequest">
     </req>
 
-    <req name="CSSignInfo" resp="SCSignInfo" des="请求签到信息">
+    <req name="CSSignInfo" resp="SCSignInfo" des="请求签到信息" extends="MsgRequest">
     </req>
 
     <req name="CSSign" resp="SCSign" des="请求签到" extends="MsgRequest">
@@ -115,35 +115,43 @@
         <field name="listPlayerId" type="List[string]" des="需要删除的好友id" />
     </req>
 
-    <req name="CSFriendAddApply" resp="SCFriendAddApply" des="请求申请添加好友" >
+    <req name="CSFriendAddApply" resp="SCFriendAddApply" des="请求申请添加好友" extends="MsgRequest">
         <field name="listPlayerId" type="List[string]" des="申请的玩家id" />
     </req>
 
-    <req name="CSFriendAddAgree" resp="SCFriendAddAgree" des="请求同意添加好友">
+    <req name="CSFriendAddAgree" resp="SCFriendAddAgree" des="请求同意添加好友" extends="MsgRequest">
         <field name="listPlayerId" type="List[string]" des="同意添加的玩家id" />
     </req>
 
-    <req name="CSFriendRefuse" resp="SCFriendRefuse" des="拒绝添加好友">
+    <req name="CSFriendRefuse" resp="SCFriendRefuse" des="拒绝添加好友" extends="MsgRequest">
         <field name="listPlayerId" type="List[string]" des="拒绝的玩家id" />
     </req>
 
-    <req name="CSFriendSearch" resp="SCFriendSearch" des="请求搜索玩家">
+    <req name="CSFriendSearch" resp="SCFriendSearch" des="请求搜索玩家" extends="MsgRequest">
         <field name="keyword" type="string" des="搜索关键字" />
     </req>
 
-    <req name="CSFriendVisitRecordList" resp="SCFriendVisitRecordList" des="请求玩家访问记录列表">
+    <req name="CSFriendVisitRecordList" resp="SCFriendVisitRecordList" des="请求玩家访问记录列表" extends="MsgRequest">
     </req>
 
-    <req name="CSFriendDonate" resp="SCFriendDonate" des="申请好友赠送">
+    <req name="CSFriendDonate" resp="SCFriendDonate" des="申请好友赠送" extends="MsgRequest">
         <field name="playerId" type="string" des="好友id"/>
         <field name="listGoods" type="List[GoodsItem]" des="赠送的物品列表"/>
     </req>
 
-    <req name="CSFriendInteract" resp="SCFriendInteract" des="申请好友互动">
+    <req name="CSFriendInteract" resp="SCFriendInteract" des="申请好友互动" extends="MsgRequest">
         <field name="playerId" type="int" des="好友id"/>
         <field name="friendInteractType" type="FriendInteractType" des="好友互动类型"/>
     </req>
     <!-- 好友 -->
+
+    <req name="CSBuyGoods" resp="SCBuyGoods" des="申请购买物品" extends="MsgRequest">
+        <field name="goodsItem" type="List[GoodsItem]" des="购买的物品"/>
+    </req>
+
+    <req name="CSExchangeGood" resp="SCExchangeGood" des="申请兑换物品" extends="MsgRequest">
+        <field name="exchangeCode" type="string" des="兑换码"/>
+    </req>
     <!-- 请求定义 -->
     
 
@@ -152,7 +160,8 @@
         <field name="heartInfo" type="List[MsgResponse]" des="多条的心跳" />
     </resp>
 
-    <resp name="SCRenewGame" des="回复游戏更新" extends="MsgResponse"></resp>
+    <resp name="SCRenewGame" des="回复游戏更新" extends="MsgResponse">
+    </resp>
 
     <resp name="SCLoginCloud" des="回复登录云引擎" extends="MsgResponse"> 
         <field name="curServerTime" type="long" des="当前服务器时间" />
@@ -200,6 +209,13 @@
     </resp>
 
     <resp name="SCFriendDonate" des="回复好友互动(Code码)">
+    </resp>
+
+    <resp name="SCBuyGoods" des="回复购买物品(Code码)">
+    </resp>
+
+    <resp name="SCExchangeGood" des="回复兑换物品">
+        <field name="goodsItem" type="list[GoodsItem]" des="兑换的物品" />
     </resp>
     <!-- 好友 -->
     <!-- 回复定义 -->
