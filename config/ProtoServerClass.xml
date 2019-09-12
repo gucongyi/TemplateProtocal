@@ -78,7 +78,7 @@
         <field name="playerInfo" type="PlayerDataSimple" des="玩家信息"/>
         <field name="listFriend" type="List[PlayerDataSimple]" des="好友列表"/>
         <field name="listFriendApply" type="List[PlayerDataSimple]" des="好友申请列表"/>
-        <field name="listBag" type="List[GoodsItem]" des="背包信息"/>
+        <field name="listBag" type="List[GoodsItem]" des="仓库信息"/>
     </class>
 
     <class name="FriendVisitRecord" des="访客记录">
@@ -179,6 +179,11 @@
     <req name="CSGoodInfo" resp="SCGoodInfo" des="申请商品信息" extends="MsgRequest">
         <field name="goodId" type="List[int]" des="商品id"/>
     </req>
+
+    <req name="CSGoodAskFor" resp="SCGoodAskFor" des="申请向好友索要" extends="MsgRequest">
+        <field name="playerId" type="string" des="好友id"/>
+        <field name="listGoods" type="List[GoodsItem]" des="索要的物品列表"/>
+    </req>
     <!-- 商城 -->
     <!-- 请求定义 -->
     
@@ -256,6 +261,9 @@
 
     <resp name="SCGoodInfo" des="回复商品信息" extends="MsgResponse">
         <field name="listGoodInfo" type="List[GoodInfo]" des="商品列表"/>
+    </resp>
+
+    <resp name="SCGoodAskFor" des="回复向好友索要(Code码)" extends="MsgResponse">
     </resp>
     <!-- 好友 -->
     <!-- 回复定义 -->
