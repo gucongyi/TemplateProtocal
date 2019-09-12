@@ -2,9 +2,10 @@
 <msgs package="" name="ProtoServerClass">
     <!-- enum定义 -->
     <enum name="SignState" des="签到状态">
-        <field name="NormalSign" des="正常签到" />
-        <field name="UnSign" des="未签到" />
-        <field name="RepairSign" des="补签" />
+        <field name="Signed" des="已签到" />
+        <field name="UnSign" des="不可签" />
+        <field name="CanRepairSign" des="可补签" />
+		<field name="CurrCanSign" des="当前天可签" />
     </enum>
 
     <enum name="ShopType" des="商城主分类">
