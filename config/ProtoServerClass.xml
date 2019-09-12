@@ -176,7 +176,7 @@
     </req>
 
     <req name="CSGoodInfo" resp="SCGoodInfo" des="申请商品信息" extends="MsgRequest">
-        <field name="goodId" type="list[int]" des="商品id"/>
+        <field name="goodId" type="List[int]" des="商品id"/>
     </req>
     <!-- 商城 -->
     <!-- 请求定义 -->
