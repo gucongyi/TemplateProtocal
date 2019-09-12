@@ -4,5 +4,4 @@
 //{{ data.des }}{% endif %}
 {% for property in data.properties %}{% if property.msg %}
 /** {{ property.msg }} */{% endif %}
-exports.{{ property.name }} = {{ property.value }};{% endfor %}{% endif %}
-{% endfor %}
+exports.{{ property.name }} = {{ property.value }};{% endfor %}{% endif %}{% endfor %}

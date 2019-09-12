@@ -11,6 +11,7 @@
     <enum name="ShopType" des="商城主分类">
         <field name="YingHuaBi" des="樱花币" />
         <field name="Furniture" des="家具" />
+        <field name="Close" des="时装" />
         <field name="Heartbeat" des="心动值" />
         <field name="Exchange" des="兑换" />
     </enum>
