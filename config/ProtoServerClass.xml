@@ -173,7 +173,7 @@
         <field name="userInfo" type="UserInfo" des="用户信息" />
     </resp>
 
-    <resp name="SCSignInfo" des="回复签到信息">
+    <resp name="SCSignInfo" des="回复签到信息" extends="MsgResponse">
         <field name="listGoodInfoSign" type="List[GoodInfoSign]" des="签到信息列表" />
     </resp>
 
@@ -181,45 +181,48 @@
     </resp>
 
     <!-- 好友 -->
-    <resp name="SCFriendList" des="回复好友列表">
+    <resp name="SCFriendList" des="回复好友列表" extends="MsgResponse">
         <field name="listFriend" type="List[PlayerDataSimple]" des="好友列表" />
     </resp>
 
-    <resp name="SCFriendListRecommend" des="回复好友列表推荐">
+    <resp name="SCFriendListRecommend" des="回复好友列表推荐" extends="MsgResponse">
         <field name="listRecommend" type="List[PlayerDataSimple]" des="推荐列表" />
     </resp>
 
-    <resp name="scFriendListApply" des="回复申请添加好友列表">
+    <resp name="SCFriendListApply" des="回复申请添加好友列表" extends="MsgResponse">
         <field name="listApply" type="List[PlayerDataSimple]" des="回复申请添加好友列表" />
     </resp>
 
-    <resp name="SCFriendDelete" des="回复好友删除(Code码)">
+    <resp name="SCFriendDelete" des="回复好友删除(Code码)" extends="MsgResponse">
     </resp>
 
-    <resp name="SCFriendAddApply" des="回复添加好友申请(Code码)">
+    <resp name="SCFriendAddApply" des="回复添加好友申请(Code码)" extends="MsgResponse">
     </resp>
 
-    <resp name="SCFriendAddAgree" des="回复同意添加好友(Code码)">
+    <resp name="SCFriendAddAgree" des="回复同意添加好友(Code码)" extends="MsgResponse">
     </resp>
 
-    <resp name="SCFriendRefuse" des="回复拒绝添加好友(Code码)">
+    <resp name="SCFriendRefuse" des="回复拒绝添加好友(Code码)" extends="MsgResponse">
     </resp>
 
-    <resp name="SCFriendSearch" des="回复搜索的玩家信息">
+    <resp name="SCFriendSearch" des="回复搜索的玩家信息" extends="MsgResponse">
         <field name="listPlayerDataSimple" type="List[PlayerDataSimple]" des="回复申请添加好友列表" />
     </resp>
 
-    <resp name="SCFriendVisitRecordList" des="回复玩家访客记录列表">
+    <resp name="SCFriendVisitRecordList" des="回复玩家访客记录列表" extends="MsgResponse">
         <field name="listFriendVisitRecords" type="List[FriendVisitRecord]" des="访客记录列表" />
     </resp>
 
-    <resp name="SCFriendDonate" des="回复好友互动(Code码)">
+    <resp name="SCFriendDonate" des="回复好友赠送(Code码)" extends="MsgResponse">
     </resp>
 
-    <resp name="SCBuyGoods" des="回复购买物品(Code码)">
+    <resp name="SCFriendInteract" des="回复好友互动(Code码)" extends="MsgResponse">
     </resp>
 
-    <resp name="SCExchangeGood" des="回复兑换物品">
+    <resp name="SCBuyGoods" des="回复购买物品(Code码)" extends="MsgResponse">
+    </resp>
+
+    <resp name="SCExchangeGood" des="回复兑换物品" extends="MsgResponse">
         <field name="goodsItem" type="List[GoodsItem]" des="兑换的物品" />
     </resp>
     <!-- 好友 -->
