@@ -34,6 +34,7 @@
         <field name="Sweep" des="打扫" value="1" />
         <field name="Agree" des="点赞" value="2" />
         <field name="Donate" des="赠送" value="3" />
+        <field name="AskFor" des="索要" value="4" />
     </enum>
     <!-- enum定义 -->
 
@@ -87,6 +88,8 @@
         <field name="desc" type="string" des="访问时间戳"/>
         <field name="visitTime" type="long" des="最后登录时间戳"/>
         <field name="friendInteractType" type="FriendInteractType" des="互动类型"/>
+        <field name="goodId" type="int" des="物品id"/>
+        <field name="goodCount" type="int" des="物品数量"/>
     </class>
 
     <class name="GoodInfo" des="商品信息">
