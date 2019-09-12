@@ -102,7 +102,7 @@
 
     <req name="CSSign" resp="SCSign" des="请求签到" extends="MsgRequest">
         <field name="isRepair" type="bool" des="是否是补签" />
-        <field name="goodId" type="List[int]" des="商品id" />
+        <field name="goodId" type="int" des="商品id" />
         <field name="whatDay" type="int" des="第几天" />
     </req>
 
@@ -178,6 +178,7 @@
     </resp>
 
     <resp name="SCSign" des="回复签到(Code码)" extends="MsgResponse"> 
+        <field name="yingHuaBi" type="int" des="樱花币数量" />
     </resp>
 
     <!-- 好友 -->
