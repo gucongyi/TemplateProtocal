@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <msgs package="" name="ProtoServerClass">
     <!-- enum定义 -->
     <enum name="SignState" des="签到状态">
@@ -58,10 +58,11 @@
         <field name="itemCount" type="int" des="道具数量"/>
     </class>
   <class name="GoodInfoSign" des="签到物品信息">
-    <field name="goodId" type="int" des="道具id"/>
+    <field name="goodsItem" type="GoodsItem" des="签到物品"/>
     <field name="signState" type="SignState" des="签到状态"/>
     <field name="vip" type="bool" des="是否vip双倍"/>
     <field name="whatDay" type="int" des="第几天"/>
+    <field name="costYingHuaBi" type="int" des="需要花费的樱花币"/>
   </class>
   <class name="PlayerDataSimple" des="人物简单信息">
         <field name="playerId" type="int" des="玩家id"/>
@@ -293,9 +294,7 @@
         <field name="Sign_Signed" msg="已签到"  value="102" />
         <field name="Sign_RepairSigned" msg="已补签"  value="103" />
         <field name="Sign_NotInSignTime" msg="不在签到时间范围内"  value="104" />
-        <field name="Friend_AlreadyFriend" msg="已是好友"  value="201" />
-        <field name="Friend_AlreadyApply" msg="已发起过好友申请"  value="202" />
-        <field name="Friend_AlreadyExist" msg="玩家不存在"  value="203" />
+		
     </class>
     <!-- 错误码定义 -->
 </msgs>
