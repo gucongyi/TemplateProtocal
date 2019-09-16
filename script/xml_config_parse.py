@@ -18,7 +18,7 @@ def collect_pojo_from_files():
 
     pojos_config = None
     # 标签列表
-    label_list = ['req', 'class', 'enum', 'resp']
+    label_list = ['class', 'req', 'enum', 'resp']
     if 'msgs' in data:
         pojos_config = data['msgs']
 
@@ -52,7 +52,7 @@ def parse_bean(config):
         'properties': []
     }
     # 属性列表
-    attr_list = ['extends', 'des', 'resp', 'type']
+    attr_list = ['extends', 'des', 'resp', 'type', 'label']
     for attr in attr_list:
         if attr in config:
             bean.setdefault(attr, config[attr])

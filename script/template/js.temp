@@ -4,10 +4,11 @@
 /**
  * {{ data.des }}
  */{% endif %}
-exports.{{ data.name|first_upper }} = class {{ data.name|first_upper }}
+exports.{{ data.name|first_upper }} = class {{ data.name|first_upper }}{% if data.extends %} extends exports.{{ data.extends }} {% endif %}
 {
 	constructor(obj)
-    { {% if data.properties %}{% if data.resp %}
+    { {% if data.extends %}
+        super(obj); {% endif %}{% if data.properties %}{% if data.resp %}
     	try {
             //检查参数是否异常
             if({% for property in data.properties %}obj.{{ property.name }} == null{% if not loop.last %}
@@ -25,7 +26,9 @@ exports.{{ data.name|first_upper }} = class {{ data.name|first_upper }}
         {% else %}
         {% for property in data.properties %}{% if property.des %}
         //{{ property.des }}{% endif %}
-        this.{{ property.name }} = obj.{{ property.name }}{% endfor %}{% endif %}{% endif %}
+        this.{{ property.name }} = obj.{{ property.name }};{% endfor %}{% endif %}{% endif %}{% if data.label == 'resp' %}
+        this.nameClass = '{{ data.name|first_upper }}';{% endif %}
     }
 }
+{% if data.resp %}exports.{{ data.name|first_upper }}.ClassName = '{{ data.name|first_upper }}';{% endif %}
 {% endfor %}

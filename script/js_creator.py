@@ -32,6 +32,12 @@ def create_server():
     req_dict = {}
     enum_dict = {}
     for (k, v) in pojo_map.items():
+        if k is 'class':
+            for key, value in v.items():
+                if 'type' in value and value['type'] == 'CodeError':
+                    req_dict.setdefault(key, value)
+                else:
+                    class_dict.setdefault(key, value)
         if k is 'req':
             for key, value in v.items():
                 class_dict.setdefault(key, value)
@@ -43,13 +49,8 @@ def create_server():
         if k is 'enum':
             for key, value in v.items():
                 enum_dict.setdefault(key, value)
-        if k is 'class':
-            for key, value in v.items():
-                if 'type' in value and value['type'] == 'CodeError':
-                    req_dict.setdefault(key, value)
-                else:
-                    class_dict.setdefault(key, value)
         
+
     if class_dict:
         class_dict_plus = {}
         class_dict_plus['datas'] = class_dict
