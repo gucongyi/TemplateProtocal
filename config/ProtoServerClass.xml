@@ -286,14 +286,15 @@
     <!-- 错误码定义 所有成功均返回value:0 -->
     <class name="ProxyDicCode" type="CodeError" des="协议码">
         <field name="Success" msg="成功" value="0" />
+		<field name="User_UnLogin" msg="用户未登录"  value="1" />
         <field name="Fail" msg="失败" value="2" />
+		<field name="User_YingHuaBiNotEnough" msg="樱花币不足"  value="3" />
         <field name="CS_ParamException" msg="请求参数异常"  value="101" />
-
-        <field name="User_UnLogin" msg="用户未登录"  value="1" />
-        <field name="Sign_ParamException" msg="签到参数异常"  value="101" />
         <field name="Sign_Signed" msg="已签到"  value="102" />
         <field name="Sign_RepairSigned" msg="已补签"  value="103" />
         <field name="Sign_NotInSignTime" msg="不在签到时间范围内"  value="104" />
+        <field name="Sign_CurrentDayNotAllowedRepairSign" msg="当前天不允许补签"  value="105" />
+        <field name="Sign_UnReachSign" msg="签到未到达该天"  value="106" />
 		
     </class>
     <!-- 错误码定义 -->
