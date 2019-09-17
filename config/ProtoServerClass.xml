@@ -292,9 +292,7 @@
         <field name="CS_ParamException" msg="请求参数异常"  value="101" />
         <field name="Sign_Signed" msg="已签到"  value="102" />
         <field name="Sign_RepairSigned" msg="已补签"  value="103" />
-        <field name="Sign_NotInSignTime" msg="不在签到时间范围内"  value="104" />
-        <field name="Sign_CurrentDayNotAllowedRepairSign" msg="当前天不允许补签"  value="105" />
-        <field name="Sign_UnReachSign" msg="签到未到达该天"  value="106" />
+        <field name="Sign_CurrentDayNotAllowedRepairSign" msg="当前天不允许补签"  value="104" />
 		
     </class>
     <!-- 错误码定义 -->
