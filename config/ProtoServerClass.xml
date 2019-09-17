@@ -31,11 +31,10 @@
 
     <enum name="FriendInteractType" des="互动类型">
         <field name="None" des="啥也没干，只是来看了一下" value="0" />
-        <field name="Sweep" des="打扫" value="1" />
-        <field name="AgreeHouse" des="点赞小屋" value="2" />
-        <field name="AgreeDove" des="点赞鸽子" value="3" />
-        <field name="Donate" des="赠送" value="4" />
-        <field name="AskFor" des="索要" value="5" />
+        <field name="AgreeHouse" des="点赞小屋" value="1" />
+        <field name="AgreeDove" des="点赞鸽子" value="2" />
+        <field name="Donate" des="赠送" value="3" />
+        <field name="AskFor" des="索要" value="4" />
     </enum>
     <!-- enum定义 -->
 
@@ -86,10 +85,9 @@
     </class>
 
     <class name="FriendVisitRecord" des="访客记录">
-        <field name="playerId" type="int" des="玩家id"/>
+        <field name="playerId" type="string" des="玩家id"/>
         <field name="nickname" type="string" des="昵称"/>
-        <field name="desc" type="string" des="访问时间戳"/>
-        <field name="visitTime" type="long" des="最后登录时间戳"/>
+        <field name="visitTime" type="long" des="访问时间戳"/>
         <field name="friendInteractType" type="FriendInteractType" des="互动类型"/>
         <field name="goodId" type="int" des="物品id"/>
         <field name="goodCount" type="int" des="物品数量"/>
@@ -170,9 +168,10 @@
     </req>
 
     <req name="CSFriendInteract" resp="SCFriendInteract" des="请求好友互动(访问、点赞、打扫)" extends="MsgRequest">
-        <field name="playerId" type="int" des="好友id"/>
+        <field name="playerId" type="string" des="好友id"/>
         <field name="friendInteractType" type="FriendInteractType" des="好友互动类型"/>
     </req>
+	
     <!-- 好友 -->
 
     <!-- 商城 -->
@@ -258,10 +257,13 @@
     </resp>
 
     <resp label="resp" name="SCFriendDonate" des="回复好友赠送(Code码)" extends="MsgResponse">
-    </resp>
+	</resp>
 
-    <resp label="resp" name="SCFriendInteract" des="回复好友互动(Code码)" extends="MsgResponse">
-    </resp>
+    <resp label="resp" name="SCFriendInteract" des="回复好友互动" extends="MsgResponse">
+		<field name="HouseData" type="string" des="小屋数据" />
+		<field name="isAdmireHouse" type="bool" des="是否可点赞小屋" />
+		<field name="isAdmireDove" type="bool" des="是否可点赞鸽子" />
+	</resp>
 
     <resp label="resp" name="SCBuyGoods" des="回复购买物品(Code码)" extends="MsgResponse">
     </resp>
