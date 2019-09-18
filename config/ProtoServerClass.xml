@@ -30,8 +30,8 @@
 
     <enum name="FriendInteractType" des="互动类型">
         <field name="None" des="啥也没干，只是来看了一下" value="0" />
-        <field name="AgreeHouse" des="点赞小屋" value="1" />
-        <field name="AgreeDove" des="点赞鸽子" value="2" />
+        <field name="AdmireHouse" des="点赞小屋" value="1" />
+        <field name="AdmireDove" des="点赞鸽子" value="2" />
         <field name="Donate" des="赠送" value="3" />
         <field name="AskFor" des="索要" value="4" />
     </enum>
@@ -174,6 +174,8 @@
         <field name="friendInteractType" type="FriendInteractType" des="好友互动类型"/>
     </req>
 	
+	<req name="CSFriendClearVisitRecord" resp="SCFriendClearVisitRecord" des="请求清除访问列表" extends="MsgRequest">
+	</req>
     <!-- 好友 -->
 
     <!-- 商城 -->
@@ -257,10 +259,10 @@
     <resp label="resp" name="SCFriendDonate" des="回复好友赠送(Code码)" extends="MsgResponse">
 	</resp>
 
-    <resp label="resp" name="SCFriendInteract" des="回复好友互动" extends="MsgResponse">
-		<field name="HouseData" type="string" des="小屋数据" />
-		<field name="isAdmireHouse" type="bool" des="是否可点赞小屋" />
-		<field name="isAdmireDove" type="bool" des="是否可点赞鸽子" />
+    <resp label="resp" name="SCFriendInteract" des="回复好友互动(Code码)" extends="MsgResponse">
+	</resp>
+	
+	<resp label="resp" name="SCFriendClearVisitRecord" des="回复清除访问列表(Code码)" extends="MsgResponse">
 	</resp>
 	<!-- 好友 -->
 
@@ -296,6 +298,10 @@
         <field name="Sign_CurrentDayNotAllowedRepairSign" msg="当前天不允许补签"  value="104" />
 		<field name="Mall_ShopNotExist" msg="商品不存在"  value="201" />
 		<field name="Mall_ShopNotInExchangeTime" msg="商品不在限时兑换时间内"  value="202" />
+		
+		<field name="Friend_NotFriend" msg="还不是好友"  value="301" />
+		<field name="Friend_AdmiredHouse" msg="今日已点赞小屋"  value="302" />
+		<field name="Friend_AdmiredDove" msg="今日已点赞鸽子"  value="303" />
 
     </class>
     <!-- 错误码定义 -->
