@@ -9,11 +9,10 @@
     </enum>
 
     <enum name="ShopType" des="商城主分类">
-        <field name="YingHuaBi" des="樱花币" />
         <field name="Furniture" des="家具" />
-        <field name="Clothing" des="时装" />
+        <field name="Clothing" des="服装" />
         <field name="Heartbeat" des="心动值" />
-        <field name="Exchange" des="兑换" />
+        <field name="Exchange" des="限时兑换" />
     </enum>
 
     <enum name="GoodType" des="物品分类">
@@ -94,17 +93,20 @@
         <field name="isReply" type="bool" des="是否回复"/>
     </class>
 
-    <class name="GoodInfo" des="商品信息">
-        <field name="goodId" type="int" des="商品id"/>
+    <class name="ShopInfo" des="商品信息">
+        <field name="shopId" type="int" des="商品id"/>
         <field name="shopType" type="ShopType" des="商品类型"/>
-        <field name="goodType" type="GoodType" des="物品类型"/>
-        <field name="itemId" type="int" des="对应道具Id"/>
-        <field name="haveCount" type="int" des="拥有数量  数量限额99"/>
-        <field name="goodPrice" type="int" des="货物价格"/>
-        <field name="uptime" type="long" des="物品上线时间"/>
-        <field name="isPromotion" type="bool" des="物品是否促销"/>
-        <field name="timeBegin" type="long" des="限时促销开始时间"/>
-        <field name="timeEnd" type="long" des="限时促销结束时间"/>
+        <field name="goodId" type="int" des="对应物品Id"/>
+		<field name="goodNum" type="int" des="对应物品数量"/>
+		<field name="goodHandselNum" type="int" des="对应物品赠送数量（只有心动值类型才有赠送数量）"/>
+        <field name="originalPrice" type="int" des="原价"/>
+        <field name="promotionPrice" type="int" des="促销价"/>
+        <field name="upNewTimeBegin" type="long" des="上新开始时间"/>
+        <field name="upNewTimeEnd" type="long" des="上新结束时间"/>
+        <field name="promotionTimeBegin" type="long" des="促销开始时间"/>
+		<field name="promotionTimeEnd" type="long" des="促销结束时间"/>
+		<field name="exchangeTimeBegin" type="long" des="限时兑换开始时间"/>
+		<field name="exchangeTimeEnd" type="long" des="限时兑换结束时间"/>
     </class>
     <!-- class定义 -->
 
@@ -175,19 +177,15 @@
     <!-- 好友 -->
 
     <!-- 商城 -->
-    <req name="CSBuyGoods" resp="SCBuyGoods" des="请求购买物品" extends="MsgRequest">
-        <field name="goodsItem" type="List[GoodsItem]" des="购买的物品"/>
+	<req name="CSShopInfo" resp="SCShopInfo" des="请求商城信息" extends="MsgRequest">
+    </req>
+	
+    <req name="CSBuyShops" resp="SCBuyShops" des="请求购买商品" extends="MsgRequest">
+        <field name="shopsItem" type="GoodsItem" des="购买的商品"/>
     </req>
 
     <req name="CSExchangeGood" resp="SCExchangeGood" des="请求兑换物品" extends="MsgRequest">
         <field name="exchangeCode" type="string" des="兑换码"/>
-    </req>
-
-    <req name="CSShopInfo" resp="SCShopInfo" des="请求商城信息" extends="MsgRequest">
-    </req>
-
-    <req name="CSGoodInfo" resp="SCGoodInfo" des="请求商品信息" extends="MsgRequest">
-        <field name="goodId" type="List[int]" des="商品id"/>
     </req>
 
     <req name="CSGoodAskFor" resp="SCGoodAskFor" des="请求向好友索要" extends="MsgRequest">
@@ -264,25 +262,26 @@
 		<field name="isAdmireHouse" type="bool" des="是否可点赞小屋" />
 		<field name="isAdmireDove" type="bool" des="是否可点赞鸽子" />
 	</resp>
+	<!-- 好友 -->
 
-    <resp label="resp" name="SCBuyGoods" des="回复购买物品(Code码)" extends="MsgResponse">
+	<!-- 商城 -->
+	<resp label="resp" name="SCShopInfo" des="回复商城信息" extends="MsgResponse">
+        <field name="listShopInfo" type="List[ShopInfo]" des="商品列表"/>
+    </resp>
+	
+    <resp label="resp" name="SCBuyShops" des="回复购买商品" extends="MsgResponse">
+		<field name="goodsItem" type="List[GoodsItem]" des="获得的物品" />
+		<field name="yingHuaBi" type="int" des="当前樱花币数量" />
+		<field name="heartbeat" type="int" des="当前心动值数量" />
     </resp>
 
     <resp label="resp" name="SCExchangeGood" des="回复兑换物品" extends="MsgResponse">
         <field name="goodsItem" type="List[GoodsItem]" des="兑换的物品" />
     </resp>
 
-    <resp label="resp" name="SCShopInfo" des="回复商城信息" extends="MsgResponse">
-        <field name="listGoodInfo" type="List[GoodInfo]" des="商品列表"/>
-    </resp>
-
-    <resp label="resp" name="SCGoodInfo" des="回复商品信息" extends="MsgResponse">
-        <field name="listGoodInfo" type="List[GoodInfo]" des="商品列表"/>
-    </resp>
-
     <resp label="resp" name="SCGoodAskFor" des="回复向好友索要(Code码)" extends="MsgResponse">
     </resp>
-    <!-- 好友 -->
+    <!-- 商城 -->
     <!-- 回复定义 -->
 
     <!-- 错误码定义 所有成功均返回value:0 -->
@@ -295,7 +294,9 @@
         <field name="Sign_Signed" msg="已签到"  value="102" />
         <field name="Sign_RepairSigned" msg="已补签"  value="103" />
         <field name="Sign_CurrentDayNotAllowedRepairSign" msg="当前天不允许补签"  value="104" />
-		
+		<field name="Mall_ShopNotExist" msg="商品不存在"  value="201" />
+		<field name="Mall_ShopNotInExchangeTime" msg="商品不在限时兑换时间内"  value="202" />
+
     </class>
     <!-- 错误码定义 -->
 </msgs>
