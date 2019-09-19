@@ -154,6 +154,10 @@
 		<field name="perYingHuaBi" type="int" des="每日樱花币" />
 	</class>
 	
+	<class name="ImgBagInfo" des="图鉴信息">
+		<field name="imgId" type="int" des="图鉴id" />
+		<field name="time" type="long" des="获得时间" />
+	</class>
     <!-- class定义 -->
 
 
@@ -175,11 +179,11 @@
 	
 	<!-- 个人中心 -->
 	<req name="CSHouseInfo" resp="SCHouseInfo" des="请求小窝数据" extends="MsgRequest">
-		<field name="listPlayerId" type="List[string]" des="玩家id" />
+		<field name="playerId" type="string" des="玩家id" />
 	</req>
 	
 	<req name="CSDoveInfo" resp="SCDoveInfo" des="请求鸽子数据" extends="MsgRequest">
-		<field name="listPlayerId" type="List[string]" des="玩家id" />
+		<field name="playerId" type="string" des="玩家id" />
 	</req>
 	
 	<req name="CSImgBagInfo" resp="SCImgBagInfo" des="请求图鉴" extends="MsgRequest">
@@ -340,7 +344,7 @@
 	</resp>
 	
 	<resp label="resp" name="SCImgBagInfo" des="回复图鉴" extends="MsgResponse">
-	    <field name="listImgBagInfo" type="List[string]" des="图鉴列表" />
+	    <field name="listImgBagInfo" type="List[ImgBagInfo]" des="图鉴列表" />
 	</resp>
 	
 	<resp label="resp" name="SCBagInfo" des="回复仓库" extends="MsgResponse">
