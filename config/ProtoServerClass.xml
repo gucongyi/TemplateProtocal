@@ -91,7 +91,7 @@
         <field name="listBag" type="List[GoodsItem]" des="仓库信息"/>
         <field name="listImgBag" type="List[string]" des="图鉴库"/>
         <field name="doveID" type="int" des="鸽子ID"/>
-        <field name="houseInfo" type="List[]" des="小窝信息"/>
+        <field name="houseInfo" type="List[FurniturePos]" des="小窝信息"/>
     </class>
 
     <class name="FriendVisitRecord" des="访客记录">
