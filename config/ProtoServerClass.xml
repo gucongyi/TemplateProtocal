@@ -35,6 +35,12 @@
         <field name="Donate" des="赠送" value="3" />
         <field name="AskFor" des="索要" value="4" />
     </enum>
+	
+	<enum name="PlantType" des="作物类型">
+		<field name="Corn" des="玉米" value="0" />
+		<field name="Wheat" des="小麦" value="1" />
+		<field name="Pea" des="豌豆" value="2" />
+	</enum>
     <!-- enum定义 -->
 
 
@@ -55,14 +61,16 @@
         <field name="itemId" type="int" des="道具id"/>
         <field name="itemCount" type="int" des="道具数量"/>
     </class>
-  <class name="GoodInfoSign" des="签到物品信息">
-    <field name="goodsItem" type="GoodsItem" des="签到物品"/>
-    <field name="signState" type="SignState" des="签到状态"/>
-    <field name="vip" type="bool" des="是否vip双倍"/>
-    <field name="whatDay" type="int" des="第几天"/>
-    <field name="costYingHuaBi" type="int" des="需要花费的樱花币"/>
-  </class>
-  <class name="PlayerDataSimple" des="人物简单信息">
+	
+	<class name="GoodInfoSign" des="签到物品信息">
+		<field name="goodsItem" type="GoodsItem" des="签到物品"/>
+		<field name="signState" type="SignState" des="签到状态"/>
+		<field name="vip" type="bool" des="是否vip双倍"/>
+		<field name="whatDay" type="int" des="第几天"/>
+		<field name="costYingHuaBi" type="int" des="需要花费的樱花币"/>
+	</class>
+	
+    <class name="PlayerDataSimple" des="人物简单信息">
         <field name="playerId" type="int" des="玩家id"/>
         <field name="nickname" type="string" des="昵称"/>
         <field name="isVip" type="bool" des="是否vip"/>
@@ -81,6 +89,9 @@
         <field name="listFriend" type="List[PlayerDataSimple]" des="好友列表"/>
         <field name="listFriendApply" type="List[PlayerDataSimple]" des="好友申请列表"/>
         <field name="listBag" type="List[GoodsItem]" des="仓库信息"/>
+        <field name="listImgBag" type="List[string]" des="图鉴库"/>
+        <field name="doveID" type="int" des="鸽子ID"/>
+        <field name="houseInfo" type="List[]" des="小窝信息"/>
     </class>
 
     <class name="FriendVisitRecord" des="访客记录">
@@ -108,6 +119,41 @@
 		<field name="exchangeTimeBegin" type="long" des="限时兑换开始时间"/>
 		<field name="exchangeTimeEnd" type="long" des="限时兑换结束时间"/>
     </class>
+	
+	<class name="FurniturePos" des="家具位置">
+		<!-- 待添加 -->
+		<field name="purnitureId" type="int" des="家具id"/>
+		<field name="posX" type="float" des="家具X坐标"/>
+		<field name="posY" type="float" des="家具Z坐标"/>
+		<field name="posZIndex" type="int" des="家具层级ZIndex"/>
+		<field name="posRotation" type="float" des="家具旋转角"/>
+	</class>
+	
+	<class name="GroundInfo" des="地块信息">
+		<field name="groundId" type="int" des="地块id"/>
+		<field name="isUse" type="bool" des="可用性"/>
+		<field name="seed" type="PlantType" des="种子类型"/>
+		<field name="sowTime" type="long" des="播种时间"/>
+		<field name="harvestTime" type="long" des="收获时间"/>
+	</class>
+	
+	<class name="SeedInfo" des="种子信息">
+		<field name="seedType" type="PlantType" des="种子类型"/>
+		<field name="seedCount" type="int" des="种子数量"/>
+	</class>
+	
+	<class name="RechargeInfo" des="充值面板信息">
+		<field name="yingHuaBi" type="int" des="樱花币" />
+		<field name="yingHuaBiAttach" type="int" des="赠送的樱花币" />
+		<field name="price" type="float" des="价格" />
+	</class>
+	
+	<class name="RechargeVipInfo" des="购买vip面板信息">
+		<field name="price" type="float" des="价格" />
+		<field name="days" type="int" des="天数" />
+		<field name="perYingHuaBi" type="int" des="每日樱花币" />
+	</class>
+	
     <!-- class定义 -->
 
 
@@ -126,6 +172,29 @@
         <field name="goodId" type="int" des="商品id" />
         <field name="whatDay" type="int" des="第几天" />
     </req>
+	
+	<!-- 个人中心 -->
+	<req name="CSHouseInfo" resp="SCHouseInfo" des="请求小窝数据" extends="MsgRequest">
+		<field name="listPlayerId" type="List[string]" des="玩家id" />
+	</req>
+	
+	<req name="CSDoveInfo" resp="SCDoveInfo" des="请求鸽子数据" extends="MsgRequest">
+		<field name="listPlayerId" type="List[string]" des="玩家id" />
+	</req>
+	
+	<req name="CSImgBagInfo" resp="SCImgBagInfo" des="请求图鉴" extends="MsgRequest">
+	</req>
+	
+	<req name="CSBagInfo" resp="SCBagInfo" des="请求仓库" extends="MsgRequest">
+	</req>
+	
+	<req name="CSBagInfo" resp="SCBagInfo" des="请求仓库" extends="MsgRequest">
+	</req>
+	
+	<req name="CSExchange" resp="SCExchange" des="请求兑换" extends="MsgRequest">
+		<field name="exchangeCode" type="string" des="兑奖码" />
+	</req>
+	<!-- 个人中心 -->
 
     <!-- 好友 -->
     <req name="CSPlayerInfo" resp="SCPlayerInfo" des="请求玩家信息" extends="MsgRequest">
@@ -195,6 +264,51 @@
         <field name="listGoods" type="List[GoodsItem]" des="索要的物品列表"/>
     </req>
     <!-- 商城 -->
+	
+	<!-- 种植 -->
+	<req name="CSGroundInfo" resp="SCGroundInfo" des="请求地块信息" extends="MsgRequest">
+	    <field name="playerId" type="string" des="玩家id"/>
+	</req>
+	
+	<req name="CSSeedBag" resp="SCSeedBag" des="请求种子信息" extends="MsgRequest">
+	</req>
+	
+	<req name="CSBuySeed" resp="SCBuySeed" des="请求购买种子" extends="MsgRequest">
+		<field name="listSeedInfo" type="List[SeedInfo]" des="购买种子列表"/>
+	</req>
+	
+	<req name="CSSow" resp="SCSow" des="请求播种" extends="MsgRequest">
+		<field name="seedType" type="SeedType" des="种子列表"/>
+		<field name="groundId" type="int" des="地块id"/>
+	</req>
+	
+	<req name="CSPlantAccelerate" resp="SCPlantAccelerate" des="请求作物加速" extends="MsgRequest">
+		<field name="groundId" type="int" des="地块id"/>
+		<field name="listGoodsItem" type="List[GoodsItem]" des="加速物品"/>
+	</req>
+	
+	<req name="CSPlantHarvest" resp="SCPlantHarvest" des="请求作物收获" extends="MsgRequest">
+		<field name="listGroundId" type="List[int]" des="地块id列表"/>
+	</req>
+	
+	<req name="CSGranaryHarvest" resp="SCGranaryHarvest" des="请求谷仓信息" extends="MsgRequest">
+	</req>
+	<!-- 种植 -->
+	
+	<req name="CSRechargeInfo" resp="SCRechargeInfo" des="请求充值面板" extends="MsgRequest">
+	</req>
+	
+	<req name="CSRecharge" resp="SCRecharge" des="请求充值" extends="MsgRequest">
+		<field name="rechargeGrade" type="int" des="充值档位"/>
+	</req>
+	
+	<req name="CSRechargeVipInfo" resp="SCRechargeVipInfo" des="请求购买vip面板" extends="MsgRequest">
+	</req>
+	
+	<req name="CSRechargeVip" resp="SCRechargeVip" des="请求购买vip" extends="MsgRequest">
+		<field name="vipGrade" type="int" des="vip档位"/>
+	</req>
+	
     <!-- 请求定义 -->
     
 
@@ -218,7 +332,29 @@
     <resp label="resp" name="SCSign" des="回复签到(Code码)" extends="MsgResponse"> 
         <field name="yingHuaBi" type="int" des="樱花币数量" />
     </resp>
-
+	
+	<!-- 个人中心 -->
+	<resp label="resp" name="SCHouseInfo" des="回复小窝数据" extends="MsgResponse">
+	    <field name="houseInfo" type="List[FurniturePos]" des="家具信息列表" />
+	</resp>
+	
+	<resp label="resp" name="SCDoveInfo" des="回复鸽子数据" extends="MsgResponse">
+	    <field name="doveID" type="int" des="鸽子ID" />
+	</resp>
+	
+	<resp label="resp" name="SCImgBagInfo" des="回复图鉴" extends="MsgResponse">
+	    <field name="listImgBagInfo" type="List[string]" des="图鉴列表" />
+	</resp>
+	
+	<resp label="resp" name="SCBagInfo" des="回复仓库" extends="MsgResponse">
+	    <field name="listBagInfo" type="List[GoodsItem]" des="仓库道具列表" />
+	</resp>
+	
+	<resp label="resp" name="SCExchange" des="回复兑换" extends="MsgResponse">
+	    <field name="listExchangeItem" type="List[GoodsItem]" des="兑换道具列表" />
+	</resp>
+	<!-- 个人中心 -->
+	
     <!-- 好友 -->
     <resp label="resp" name="SCPlayerInfo" des="回复玩家信息" extends="MsgResponse">
         <field name="listPlayerInfo" type="List[PlayerDataSimple]" des="玩家信息" />
@@ -284,6 +420,57 @@
     <resp label="resp" name="SCGoodAskFor" des="回复向好友索要(Code码)" extends="MsgResponse">
     </resp>
     <!-- 商城 -->
+	
+    <!-- 种植 -->
+	<resp label="resp" name="SCGroundInfo" des="回复地块信息" extends="MsgResponse">
+		<field name="listGroundInfo" type="List[GroundInfo]" des="地块信息列表" />
+	</resp>
+	
+	<resp label="resp" name="SCSeedBag" des="回复种子背包" extends="MsgResponse">
+		<field name="listSeedInfo" type="List[SeedInfo]" des="种子背包列表" />
+	</resp>
+	
+	<resp label="resp" name="SCBuySeed" des="回复种子购买" extends="MsgResponse">
+		<field name="listSeedInfo" type="List[SeedInfo]" des="种子背包列表" />
+		<field name="yingHuaBi" type="int" des="樱花币" />
+	</resp>
+	
+	<resp label="resp" name="SCSow" des="回复播种(Code码)" extends="MsgResponse">
+	</resp>
+	
+	<resp label="resp" name="SCPlantAccelerate" des="回复作物加速" extends="MsgResponse">
+		<field name="groundInfo" type="GroundInfo" des="地块信息" />
+	</resp>
+	
+	<resp label="resp" name="SCPlantHarvest" des="回复作物收获" extends="MsgResponse">
+		<field name="listGroundInfo" type="List[GroundInfo]" des="地块信息列表" />
+		<field name="listGranaryInfo" type="List[SeedInfo]" des="谷仓饲料列表" />
+	</resp>
+	
+	<resp label="resp" name="SCGranaryHarvest" des="回复谷仓信息" extends="MsgResponse">
+		<field name="listGranaryInfo" type="List[SeedInfo]" des="谷仓饲料列表" />
+	</resp>
+    <!-- 种植 -->
+	
+	<resp label="resp" name="SCRechargeInfo" des="回复充值面板" extends="MsgResponse">
+		<field name="isFirst" type="bool" des="是否首充" />
+		<field name="listRechargeInfo" type="List[RechargeInfo]" des="充值面板信息列表" />
+	</resp>
+	
+	<resp label="resp" name="SCRecharge" des="回复充值" extends="MsgResponse">
+		<field name="yingHuaBi" type="int" des="樱花币" />
+	</resp>
+	
+	<resp label="resp" name="SCRechargeVipInfo" des="回复购买vip面板" extends="MsgResponse">
+		<field name="listRechargeVipInfo" type="List[RechargeVipInfo]" des="购买vip面板列表" />
+		<field name="endTime" type="int" des="vip到期天数" />
+	</resp>
+	
+	<resp label="resp" name="SCRechargeVip" des="回复购买vip" extends="MsgResponse">
+		<field name="yingHuaBi" type="int" des="樱花币" />
+		<field name="endTime" type="int" des="vip到期天数" />
+	</resp>
+	
     <!-- 回复定义 -->
 
     <!-- 错误码定义 所有成功均返回value:0 -->
