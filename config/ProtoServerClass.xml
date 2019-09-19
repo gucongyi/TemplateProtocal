@@ -188,9 +188,6 @@
 	<req name="CSBagInfo" resp="SCBagInfo" des="请求仓库" extends="MsgRequest">
 	</req>
 	
-	<req name="CSBagInfo" resp="SCBagInfo" des="请求仓库" extends="MsgRequest">
-	</req>
-	
 	<req name="CSExchange" resp="SCExchange" des="请求兑换" extends="MsgRequest">
 		<field name="exchangeCode" type="string" des="兑奖码" />
 	</req>
@@ -278,7 +275,7 @@
 	</req>
 	
 	<req name="CSSow" resp="SCSow" des="请求播种" extends="MsgRequest">
-		<field name="seedType" type="SeedType" des="种子列表"/>
+		<field name="seedType" type="PlantType" des="种子列表"/>
 		<field name="groundId" type="int" des="地块id"/>
 	</req>
 	
