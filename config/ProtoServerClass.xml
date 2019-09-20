@@ -34,11 +34,12 @@
     </enum>
 
     <enum name="FriendInteractType" des="互动类型">
-        <field name="None" des="啥也没干，只是来看了一下" value="0" />
-        <field name="AdmireHouse" des="点赞小屋" value="1" />
-        <field name="AdmireDove" des="点赞鸽子" value="2" />
-        <field name="Donate" des="赠送" value="3" />
-        <field name="AskFor" des="索要" value="4" />
+        <field name="VisitHouse" des="访问小窝" value="0" />
+        <field name="VisitDove" des="访问鸽子" value="1" />
+        <field name="AdmireHouse" des="点赞小屋" value="2" />
+        <field name="AdmireDove" des="点赞鸽子" value="3" />
+        <field name="Donate" des="赠送" value="4" />
+        <field name="AskFor" des="索要" value="5" />
     </enum>
 	
 	<enum name="PlantType" des="作物类型">
