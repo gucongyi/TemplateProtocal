@@ -495,6 +495,8 @@
 		<field name="Friend_NotFriend" msg="还不是好友"  value="301" />
 		<field name="Friend_AdmiredHouse" msg="今日已点赞小屋"  value="302" />
 		<field name="Friend_AdmiredDove" msg="今日已点赞鸽子"  value="303" />
+		<field name="Friend_AdmireHouseLimit" msg="今日点赞小窝已达上限"  value="304" />
+		<field name="Friend_AdmireDoveLimit" msg="今日点赞鸽子已达上限"  value="305" />
 
     </class>
     <!-- 错误码定义 -->
