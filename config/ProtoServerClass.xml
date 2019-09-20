@@ -8,18 +8,23 @@
 		<field name="CurrCanSign" des="当前天可签" />
     </enum>
 
-    <enum name="ShopType" des="商城主分类">
+    <enum name="ShopType" des="商城分类">
         <field name="Furniture" des="家具" />
         <field name="Clothing" des="服装" />
         <field name="Heartbeat" des="心动值" />
         <field name="Exchange" des="限时兑换" />
     </enum>
 
-    <enum name="GoodType" des="物品分类">
-        <field name="Furniture_Chair" des="家具 椅子" />
-        <field name="Furniture_Table" des="家具 桌子" />
-        <field name="Clothing_Overcoat" des="时装 外套" />
-        <field name="Clothing_Shoes" des="时装 鞋子" />
+    <enum name="GoodType" des="物品主分类">
+        <field name="Seed" des="种子" />
+        <field name="Furniture" des="家具" />
+        <field name="Clothing" des="服装" />
+        <field name="StoryItem" des="剧情物品" />
+		<field name="HeartbeatGift" des="心动礼物" />
+		<field name="GiftPacks" des="礼包" />
+    </enum>
+	
+	<enum name="GoodSubType" des="物品子分类">
     </enum>
 
     <enum name="TitleType" des="称号类型">
