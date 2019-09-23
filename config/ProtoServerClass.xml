@@ -27,12 +27,6 @@
 	<enum name="GoodSubType" des="物品子分类">
     </enum>
 
-    <enum name="TitleType" des="称号类型">
-        <field name="TitleType1" des="" value="0" />
-        <field name="TitleType2" des="" value="1" />
-        <field name="TitleType3" des="" value="2" />
-    </enum>
-
     <enum name="FriendInteractType" des="互动类型">
         <field name="VisitHouse" des="访问小窝" value="0" />
         <field name="VisitDove" des="访问鸽子" value="1" />
@@ -128,11 +122,11 @@
 	
 	<class name="FurniturePos" des="家具位置">
 		<!-- 待添加 -->
-		<field name="purnitureId" type="int" des="家具id"/>
-		<field name="posX" type="float" des="家具X坐标"/>
-		<field name="posY" type="float" des="家具Z坐标"/>
-		<field name="posZIndex" type="int" des="家具层级ZIndex"/>
-		<field name="posRotation" type="float" des="家具旋转角"/>
+		<field name="id" type="int" des="家具id"/>
+		<field name="x" type="float" des="家具X坐标"/>
+		<field name="y" type="float" des="家具Z坐标"/>
+		<field name="z" type="int" des="家具层级ZIndex"/>
+		<field name="r" type="float" des="家具旋转角"/>
 	</class>
 	
 	<class name="GroundInfo" des="地块信息">
@@ -260,10 +254,6 @@
 	
     <req name="CSBuyShops" resp="SCBuyShops" des="请求购买商品" extends="MsgRequest">
         <field name="shopsItem" type="GoodsItem" des="购买的商品"/>
-    </req>
-
-    <req name="CSExchangeGood" resp="SCExchangeGood" des="请求兑换物品" extends="MsgRequest">
-        <field name="exchangeCode" type="string" des="兑换码"/>
     </req>
 
     <req name="CSShopAskFor" resp="SCShopAskFor" des="请求向好友索要商品" extends="MsgRequest">
@@ -485,6 +475,7 @@
         <field name="Success" msg="成功" value="0" />
 		<field name="User_UnLogin" msg="用户未登录"  value="1" />
         <field name="Fail" msg="失败" value="2" />
+		<field name="CountNotEnough" msg="数量不足"  value="4" />
 		<field name="User_YingHuaBiNotEnough" msg="樱花币不足"  value="3" />
         <field name="CS_ParamException" msg="请求参数异常"  value="101" />
         <field name="Sign_Signed" msg="已签到"  value="102" />
