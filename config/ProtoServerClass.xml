@@ -203,13 +203,21 @@
 		<field name="titleId" type="int" des="称号id" />
 	</req>
 	
-	<req name="CSTitleCurrent" resp="SCTitleCurrent" des="请求当前称号" extends="MsgRequest">
-	</req>
-	
 	<req name="CSShareReward" resp="SCShareReward" des="请求分享奖励" extends="MsgRequest">
 	</req>
 	
 	<req name="CSDefaultPortrait" resp="SCDefaultPortrait" des="请求使用默认头像" extends="MsgRequest">
+	</req>
+	
+	<req name="CSDefaultNickname" resp="SCDefaultNickname" des="请求使用默认昵称" extends="MsgRequest">
+	</req>
+	
+	<req name="CSSendHouseToFriend" resp="SCSendHouseToFriend" des="请求发送小窝给好友" extends="MsgRequest">
+		<field name="houseInfo" type="List[FurniturePos]" des="家具信息列表" />
+	</req>
+	
+	<req name="CSSendDoveToFriend" resp="SCSendDoveToFriend" des="请求发送鸽子给好友" extends="MsgRequest">
+		<field name="doveId" type="int" des="鸽子id" />
 	</req>
 	<!-- 个人中心 -->
 
@@ -373,16 +381,22 @@
 	<resp label="resp" name="SCTitleChange" des="回复称号更换(Code码)" extends="MsgResponse">
 	</resp>
 	
-	<resp label="resp" name="SCTitleCurrent" des="回复当前称号" extends="MsgResponse">
-	    <field name="titleId" type="int" des="称号id" />
-	</resp>
-	
 	<resp label="resp" name="SCShareReward" des="回复分享奖励" extends="MsgResponse">
 	    <field name="yingHuaBi" type="int" des="樱花币数量" />
 	</resp>
 	
 	<resp label="resp" name="SCDefaultPortrait" des="回复使用默认头像" extends="MsgResponse">
 	    <field name="defaultPortrait" type="string" des="默认头像" />
+	</resp>
+	
+	<resp label="resp" name="SCDefaultNickname" des="回复使用默认昵称" extends="MsgResponse">
+	    <field name="defaultNickname" type="string" des="默认昵称" />
+	</resp>
+	
+	<resp label="resp" name="SCSendHouseToFriend" des="回复发送小窝给好友(Code码)" extends="MsgResponse">
+	</resp>
+	
+	<resp label="resp" name="SCSendDoveToFriend" des="回复发送鸽子给好友(Code码)" extends="MsgResponse">
 	</resp>
 	<!-- 个人中心 -->
 	
