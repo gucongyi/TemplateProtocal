@@ -206,18 +206,22 @@
 	<req name="CSShareReward" resp="SCShareReward" des="请求分享奖励" extends="MsgRequest">
 	</req>
 	
-	<req name="CSDefaultPortrait" resp="SCDefaultPortrait" des="请求使用默认头像" extends="MsgRequest">
+	<req name="CSSetPortrait" resp="SCSetPortrait" des="请求设置头像" extends="MsgRequest">
+		<field name="portraitUrl" type="string" des="头像链接" />
 	</req>
 	
-	<req name="CSDefaultNickname" resp="SCDefaultNickname" des="请求使用默认昵称" extends="MsgRequest">
+	<req name="CSSetNickname" resp="SCSetNickname" des="请求设置昵称" extends="MsgRequest">
+		<field name="nickname" type="string" des="昵称" />
 	</req>
 	
 	<req name="CSSendHouseToFriend" resp="SCSendHouseToFriend" des="请求发送小窝给好友" extends="MsgRequest">
 		<field name="houseInfo" type="List[FurniturePos]" des="家具信息列表" />
+		<field name="friendId" type="string" des="好友id" />
 	</req>
 	
 	<req name="CSSendDoveToFriend" resp="SCSendDoveToFriend" des="请求发送鸽子给好友" extends="MsgRequest">
 		<field name="doveId" type="int" des="鸽子id" />
+		<field name="friendId" type="string" des="好友id" />
 	</req>
 	<!-- 个人中心 -->
 
@@ -385,11 +389,11 @@
 	    <field name="yingHuaBi" type="int" des="樱花币数量" />
 	</resp>
 	
-	<resp label="resp" name="SCDefaultPortrait" des="回复使用默认头像" extends="MsgResponse">
+	<resp label="resp" name="SCSetPortrait" des="回复设置头像" extends="MsgResponse">
 	    <field name="defaultPortrait" type="string" des="默认头像" />
 	</resp>
 	
-	<resp label="resp" name="SCDefaultNickname" des="回复使用默认昵称" extends="MsgResponse">
+	<resp label="resp" name="SCSetNickname" des="回复设置昵称" extends="MsgResponse">
 	    <field name="defaultNickname" type="string" des="默认昵称" />
 	</resp>
 	
