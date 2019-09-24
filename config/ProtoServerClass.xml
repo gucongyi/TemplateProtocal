@@ -89,7 +89,6 @@
         <field name="listFriend" type="List[PlayerDataSimple]" des="好友列表"/>
         <field name="listFriendApply" type="List[PlayerDataSimple]" des="好友申请列表"/>
         <field name="listBag" type="List[GoodsItem]" des="仓库信息"/>
-        <field name="listImgBag" type="List[string]" des="图鉴库"/>
         <field name="doveID" type="int" des="鸽子ID"/>
         <field name="houseInfo" type="List[FurniturePos]" des="小窝信息"/>
     </class>
@@ -124,7 +123,7 @@
 		<!-- 待添加 -->
 		<field name="id" type="int" des="家具id"/>
 		<field name="x" type="float" des="家具X坐标"/>
-		<field name="y" type="float" des="家具Z坐标"/>
+		<field name="y" type="float" des="家具Y坐标"/>
 		<field name="z" type="int" des="家具层级ZIndex"/>
 		<field name="r" type="float" des="家具旋转角"/>
 	</class>
@@ -186,14 +185,25 @@
 		<field name="playerId" type="string" des="玩家id" />
 	</req>
 	
-	<req name="CSImgBagInfo" resp="SCImgBagInfo" des="请求图鉴" extends="MsgRequest">
-	</req>
-	
 	<req name="CSBagInfo" resp="SCBagInfo" des="请求仓库" extends="MsgRequest">
 	</req>
 	
 	<req name="CSExchange" resp="SCExchange" des="请求兑换" extends="MsgRequest">
 		<field name="exchangeCode" type="string" des="兑奖码" />
+	</req>
+	
+	<req name="CSTitleAdd" resp="SCTitleAdd" des="请求解锁称号" extends="MsgRequest">
+		<field name="titleId" type="int" des="称号id" />
+	</req>
+	
+	<req name="CSTitleBag" resp="SCTitleBag" des="请求称号背包" extends="MsgRequest">
+	</req>
+	
+	<req name="CSTitleChange" resp="SCTitleChange" des="请求称号更换" extends="MsgRequest">
+		<field name="titleId" type="int" des="称号id" />
+	</req>
+	
+	<req name="CSTitleCurrent" resp="SCTitleCurrent" des="请求当前称号" extends="MsgRequest">
 	</req>
 	<!-- 个人中心 -->
 
@@ -339,16 +349,26 @@
 	    <field name="doveID" type="int" des="鸽子ID" />
 	</resp>
 	
-	<resp label="resp" name="SCImgBagInfo" des="回复图鉴" extends="MsgResponse">
-	    <field name="listImgBagInfo" type="List[ImgBagInfo]" des="图鉴列表" />
-	</resp>
-	
 	<resp label="resp" name="SCBagInfo" des="回复仓库" extends="MsgResponse">
 	    <field name="listBagInfo" type="List[GoodsItem]" des="仓库道具列表" />
 	</resp>
 	
 	<resp label="resp" name="SCExchange" des="回复兑换" extends="MsgResponse">
 	    <field name="listExchangeItem" type="List[GoodsItem]" des="兑换道具列表" />
+	</resp>
+	
+	<resp label="resp" name="SCTitleAdd" des="回复解锁称号(Code码)" extends="MsgResponse">
+	</resp>
+	
+	<resp label="resp" name="SCTitleBag" des="回复称号背包" extends="MsgResponse">
+	    <field name="listTitleBag" type="List[int]" des="称号id列表" />
+	</resp>
+	
+	<resp label="resp" name="SCTitleChange" des="回复称号更换(Code码)" extends="MsgResponse">
+	</resp>
+	
+	<resp label="resp" name="SCTitleCurrent" des="回复当前称号" extends="MsgResponse">
+	    <field name="titleId" type="int" des="称号id" />
 	</resp>
 	<!-- 个人中心 -->
 	
@@ -489,6 +509,10 @@
 		<field name="Friend_AdmiredDove" msg="今日已点赞鸽子"  value="303" />
 		<field name="Friend_AdmireHouseLimit" msg="今日点赞小窝已达上限"  value="304" />
 		<field name="Friend_AdmireDoveLimit" msg="今日点赞鸽子已达上限"  value="305" />
+		
+		<field name="Personal_TitleConfigNotExsit" msg="对应称号配置不存在"  value="401" />
+		<field name="Personal_TitleAlreadyExsit" msg="对应称号已存在"  value="401" />
+		<field name="Personal_TitleNotExsit" msg="对应称号不存在"  value="401" />
 
     </class>
     <!-- 错误码定义 -->
