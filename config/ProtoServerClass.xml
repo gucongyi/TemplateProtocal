@@ -188,7 +188,7 @@
 	<req name="CSBagInfo" resp="SCBagInfo" des="请求仓库" extends="MsgRequest">
 	</req>
 	
-	<req name="CSExchange" resp="SCExchange" des="请求兑换" extends="MsgRequest">
+	<req name="CSExchangeGood" resp="SCExchangeGood" des="请求兑换" extends="MsgRequest">
 		<field name="exchangeCode" type="string" des="兑奖码" />
 	</req>
 	
@@ -204,6 +204,12 @@
 	</req>
 	
 	<req name="CSTitleCurrent" resp="SCTitleCurrent" des="请求当前称号" extends="MsgRequest">
+	</req>
+	
+	<req name="CSShareReward" resp="SCShareReward" des="请求分享奖励" extends="MsgRequest">
+	</req>
+	
+	<req name="CSDefaultPortrait" resp="SCDefaultPortrait" des="请求使用默认头像" extends="MsgRequest">
 	</req>
 	<!-- 个人中心 -->
 
@@ -353,7 +359,7 @@
 	    <field name="listBagInfo" type="List[GoodsItem]" des="仓库道具列表" />
 	</resp>
 	
-	<resp label="resp" name="SCExchange" des="回复兑换" extends="MsgResponse">
+	<resp label="resp" name="SCExchangeGood" des="回复兑换" extends="MsgResponse">
 	    <field name="listExchangeItem" type="List[GoodsItem]" des="兑换道具列表" />
 	</resp>
 	
@@ -369,6 +375,14 @@
 	
 	<resp label="resp" name="SCTitleCurrent" des="回复当前称号" extends="MsgResponse">
 	    <field name="titleId" type="int" des="称号id" />
+	</resp>
+	
+	<resp label="resp" name="SCShareReward" des="回复分享奖励" extends="MsgResponse">
+	    <field name="yingHuaBi" type="int" des="樱花币数量" />
+	</resp>
+	
+	<resp label="resp" name="SCDefaultPortrait" des="回复使用默认头像" extends="MsgResponse">
+	    <field name="defaultPortrait" type="string" des="默认头像" />
 	</resp>
 	<!-- 个人中心 -->
 	
@@ -428,10 +442,6 @@
 		<field name="goodsItem" type="List[GoodsItem]" des="获得的物品" />
 		<field name="yingHuaBi" type="int" des="当前樱花币数量" />
 		<field name="heartbeat" type="int" des="当前心动值数量" />
-    </resp>
-
-    <resp label="resp" name="SCExchangeGood" des="回复兑换物品" extends="MsgResponse">
-        <field name="goodsItem" type="List[GoodsItem]" des="兑换的物品" />
     </resp>
 
     <resp label="resp" name="SCShopAskFor" des="回复向好友索要(Code码)" extends="MsgResponse">
