@@ -57,7 +57,7 @@
         <field name="data" type="string" des="实际信息" />
     </class>
 
-    <class name="GoodsItem" des="互动道具">
+    <class name="GoodsItem" des="道具">
         <field name="itemId" type="int" des="道具id"/>
         <field name="itemCount" type="int" des="道具数量"/>
     </class>
@@ -91,6 +91,7 @@
         <field name="listBag" type="List[GoodsItem]" des="仓库信息"/>
         <field name="doveID" type="int" des="鸽子ID"/>
         <field name="houseInfo" type="List[FurniturePos]" des="小窝信息"/>
+        <field name="titleList" type="List[int]" des="称号背包"/>
     </class>
 
     <class name="FriendVisitRecord" des="访客记录">
@@ -137,7 +138,7 @@
 	</class>
 	
 	<class name="SeedInfo" des="种子信息">
-		<field name="seedType" type="PlantType" des="种子类型"/>
+		<field name="seedId" type="int" des="种子id"/>
 		<field name="seedCount" type="int" des="种子数量"/>
 	</class>
 	
@@ -196,9 +197,6 @@
 		<field name="titleId" type="int" des="称号id" />
 	</req>
 	
-	<req name="CSTitleBag" resp="SCTitleBag" des="请求称号背包" extends="MsgRequest">
-	</req>
-	
 	<req name="CSTitleChange" resp="SCTitleChange" des="请求称号更换" extends="MsgRequest">
 		<field name="titleId" type="int" des="称号id" />
 	</req>
@@ -216,12 +214,12 @@
 	
 	<req name="CSSendHouseToFriend" resp="SCSendHouseToFriend" des="请求发送小窝给好友" extends="MsgRequest">
 		<field name="houseInfo" type="List[FurniturePos]" des="家具信息列表" />
-		<field name="friendId" type="string" des="好友id" />
+		<field name="friendId" type="List[string]" des="好友id列表" />
 	</req>
 	
 	<req name="CSSendDoveToFriend" resp="SCSendDoveToFriend" des="请求发送鸽子给好友" extends="MsgRequest">
 		<field name="doveId" type="int" des="鸽子id" />
-		<field name="friendId" type="string" des="好友id" />
+		<field name="friendId" type="List[string]" des="好友id列表" />
 	</req>
 	<!-- 个人中心 -->
 
@@ -318,6 +316,14 @@
 	
 	<req name="CSGranaryHarvest" resp="SCGranaryHarvest" des="请求谷仓信息" extends="MsgRequest">
 	</req>
+	
+	<req name="CSBuyAccelerate" resp="SCBuyAccelerate" des="请求购买作物加速道具" extends="MsgRequest">
+		<field name="listAccelerateInfo" type="List[GoodsItem]" des="购买作物加速道具列表"/>
+	</req>
+	
+	<req name="CSBuyGrid" resp="SCBuyGrid" des="请求购买格子" extends="MsgRequest">
+		<field name="buyGridNum" type="int" des="购买的格子数量"/>
+	</req>
 	<!-- 种植 -->
 	
 	<req name="CSRechargeInfo" resp="SCRechargeInfo" des="请求充值面板" extends="MsgRequest">
@@ -378,29 +384,25 @@
 	<resp label="resp" name="SCTitleAdd" des="回复解锁称号(Code码)" extends="MsgResponse">
 	</resp>
 	
-	<resp label="resp" name="SCTitleBag" des="回复称号背包" extends="MsgResponse">
-	    <field name="listTitleBag" type="List[int]" des="称号id列表" />
-	</resp>
-	
 	<resp label="resp" name="SCTitleChange" des="回复称号更换(Code码)" extends="MsgResponse">
 	</resp>
 	
 	<resp label="resp" name="SCShareReward" des="回复分享奖励" extends="MsgResponse">
-	    <field name="yingHuaBi" type="int" des="樱花币数量" />
+	    <field name="yingHuaBi" type="int" des="奖励樱花币数量" />
 	</resp>
 	
-	<resp label="resp" name="SCSetPortrait" des="回复设置头像" extends="MsgResponse">
-	    <field name="defaultPortrait" type="string" des="默认头像" />
+	<resp label="resp" name="SCSetPortrait" des="回复设置头像(Code码)" extends="MsgResponse">
 	</resp>
 	
-	<resp label="resp" name="SCSetNickname" des="回复设置昵称" extends="MsgResponse">
-	    <field name="defaultNickname" type="string" des="默认昵称" />
+	<resp label="resp" name="SCSetNickname" des="回复设置昵称(Code码)" extends="MsgResponse">
 	</resp>
 	
-	<resp label="resp" name="SCSendHouseToFriend" des="回复发送小窝给好友(Code码)" extends="MsgResponse">
+	<resp label="resp" name="SCSendHouseToFriend" des="回复发送小窝给好友" extends="MsgResponse">
+		<field name="yingHuaBi" type="int" des="奖励樱花币数量" />
 	</resp>
 	
-	<resp label="resp" name="SCSendDoveToFriend" des="回复发送鸽子给好友(Code码)" extends="MsgResponse">
+	<resp label="resp" name="SCSendDoveToFriend" des="回复发送鸽子给好友" extends="MsgResponse">
+		<field name="yingHuaBi" type="int" des="奖励樱花币数量" />
 	</resp>
 	<!-- 个人中心 -->
 	
@@ -480,7 +482,8 @@
 		<field name="yingHuaBi" type="int" des="樱花币" />
 	</resp>
 	
-	<resp label="resp" name="SCSow" des="回复播种(Code码)" extends="MsgResponse">
+	<resp label="resp" name="SCSow" des="回复播种" extends="MsgResponse">
+		<field name="listGroundInfo" type="List[GroundInfo]" des="地块信息列表" />
 	</resp>
 	
 	<resp label="resp" name="SCPlantAccelerate" des="回复作物加速" extends="MsgResponse">
@@ -494,6 +497,16 @@
 	
 	<resp label="resp" name="SCGranaryHarvest" des="回复谷仓信息" extends="MsgResponse">
 		<field name="listGranaryInfo" type="List[SeedInfo]" des="谷仓饲料列表" />
+		<field name="GridCount" type="int" des="格子总数" />
+	</resp>
+	
+	<resp label="resp" name="SCBuyAccelerate" des="回复购买作物加速道具" extends="MsgResponse">
+		<field name="listAccelerate" type="List[GoodsItem]" des="作物加速道具列表" />
+		<field name="yingHuaBi" type="int" des="樱花币" />
+	</resp>
+	
+	<resp label="resp" name="SCBuyGrid" des="回复购买格子" extends="MsgResponse">
+		<field name="GridCount" type="int" des="格子总数" />
 	</resp>
     <!-- 种植 -->
 	
@@ -537,10 +550,15 @@
 		<field name="Friend_AdmiredDove" msg="今日已点赞鸽子"  value="303" />
 		<field name="Friend_AdmireHouseLimit" msg="今日点赞小窝已达上限"  value="304" />
 		<field name="Friend_AdmireDoveLimit" msg="今日点赞鸽子已达上限"  value="305" />
+		<field name="ExchangeCodeNotExist" msg="兑换码不存在"  value="306" />
+		<field name="ExchangeCodeUsed" msg="兑换码已使用"  value="307" />
+		<field name="ExchangedGift" msg="已兑换过该礼包"  value="308" />
+		
 		
 		<field name="Personal_TitleConfigNotExsit" msg="对应称号配置不存在"  value="401" />
-		<field name="Personal_TitleAlreadyExsit" msg="对应称号已存在"  value="401" />
-		<field name="Personal_TitleNotExsit" msg="对应称号不存在"  value="401" />
+		<field name="Personal_TitleAlreadyExsit" msg="对应称号已存在"  value="402" />
+		<field name="Personal_TitleNotExsit" msg="对应称号不存在"  value="403" />
+		<field name="Personal_RewardAlreadyMax" msg="分享奖励次数已达最大"  value="404" />
 
     </class>
     <!-- 错误码定义 -->
