@@ -209,6 +209,7 @@
 	</req>
 	
 	<req name="CSSetNickname" resp="SCSetNickname" des="请求设置昵称" extends="MsgRequest">
+		<field name="useDefaultName" type="bool" des="是否启用默认昵称" />
 		<field name="nickname" type="string" des="昵称" />
 	</req>
 	
@@ -347,6 +348,10 @@
 	<resp label="resp" name="SCHeart" des="心跳回复，多条" extends="MsgResponse"> 
         <field name="heartInfo" type="List[string]" des="多条的心跳" />
     </resp>
+	
+	<resp label="resp" name="SCNotifyShopAskFor" des="通知被玩家索要" extends="MsgResponse">
+	  <field name="askForPlayerInfo" type="PlayerDataSimple" des="被索要的玩家信息" />
+	</resp>
 
     <resp label="resp" name="SCRenewGame" des="回复游戏更新" extends="MsgResponse">
     </resp>
@@ -451,6 +456,7 @@
 	
 	<resp label="resp" name="SCFriendClearVisitRecord" des="回复清除访问列表(Code码)" extends="MsgResponse">
 	</resp>
+	
 	<!-- 好友 -->
 
 	<!-- 商城 -->
