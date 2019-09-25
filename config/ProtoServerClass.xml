@@ -90,6 +90,7 @@
 	
     <class name="PlayerDataSimple" des="人物简单信息">
         <field name="playerId" type="string" des="玩家id"/>
+        <field name="digitalId" type="int" des="玩家数字id"/>
         <field name="nickname" type="string" des="昵称"/>
         <field name="isVip" type="bool" des="是否vip"/>
         <field name="titleType" type="int" des="称号类型"/>
