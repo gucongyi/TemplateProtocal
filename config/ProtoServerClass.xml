@@ -349,9 +349,19 @@
         <field name="heartInfo" type="List[string]" des="多条的心跳" />
     </resp>
 	
-	<resp label="resp" name="SCNotifyShopAskFor" des="通知被玩家索要" extends="MsgResponse">
-	  <field name="askForPlayerInfo" type="PlayerDataSimple" des="被索要的玩家信息" />
+	<!-- 回复通知定义 -->
+	<resp label="resp" name="SCNotifyFriendApply" des="通知收到好友申请" extends="MsgResponse">
+	  <field name="player" type="PlayerDataSimple" des="玩家信息" />
 	</resp>
+	
+	<resp label="resp" name="SCNotifyFriendAddAgree" des="通知收到同意添加好友" extends="MsgResponse">
+	  <field name="player" type="PlayerDataSimple" des="玩家信息" />
+	</resp>
+	
+	<resp label="resp" name="SCNotifyVisitRecord" des="通知收到访客记录" extends="MsgResponse">
+	  <field name="visitRecord" type="FriendVisitRecord" des="访客记录" />
+	</resp>
+	<!-- 回复通知定义 -->
 
     <resp label="resp" name="SCRenewGame" des="回复游戏更新" extends="MsgResponse">
     </resp>
