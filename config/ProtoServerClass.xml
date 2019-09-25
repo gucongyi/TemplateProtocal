@@ -25,6 +25,24 @@
     </enum>
 	
 	<enum name="GoodSubType" des="物品子分类">
+		<field name="CornSeed" des="玉米种子" />
+		<field name="WheatSeed" des="小麦种子" />
+		<field name="PeaSeed" des="豌豆种子" />
+		<field name="Bed" des="床" />
+		<field name="Wardrobe" des="衣柜" />
+		<field name="Cabinet" des="柜架" />
+		<field name="Curtain" des="窗帘" />
+		<field name="Light" des="灯" />
+		<field name="HangingPainting" des="挂画" />
+		<field name="Stool" des="凳子" />
+		<field name="Hairstyle" des="发型" />
+		<field name="Coat" des="上衣" />
+		<field name="Bottoms" des="下装" />
+		<field name="Dress" des="连衣裙" />
+		<field name="Shoes" des="鞋子" />
+		<field name="DramaItem" des="剧情物品" /><!-- 待定 -->
+		<field name="Heartbeat" des="心动值" /><!-- 待定 -->
+		<field name="GiftPackage" des="礼包" /><!-- 待定 -->
     </enum>
 
     <enum name="FriendInteractType" des="互动类型">
@@ -84,6 +102,7 @@
         <!-- 等待添加 -->
         <field name="lastLoginCloudTime" type="long" des="最后登录时间戳"/>
         <field name="yingHuaBi" type="long" des="樱花币"/>
+		<field name="heartbeat" type="long" des="心动值"/>
         <field name="signInfo" type="List[GoodInfoSign]" des="签到配置"/>
         <field name="playerInfo" type="PlayerDataSimple" des="玩家信息"/>
         <field name="listFriend" type="List[PlayerDataSimple]" des="好友列表"/>
