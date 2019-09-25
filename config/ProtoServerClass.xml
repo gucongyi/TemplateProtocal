@@ -334,7 +334,7 @@
 		<field name="listGroundId" type="List[int]" des="地块id列表"/>
 	</req>
 	
-	<req name="CSGranaryHarvest" resp="SCGranaryHarvest" des="请求谷仓信息" extends="MsgRequest">
+	<req name="CSGranaryInfo" resp="SCGranaryInfo" des="请求谷仓信息" extends="MsgRequest">
 	</req>
 	
 	<req name="CSBuyAccelerate" resp="SCBuyAccelerate" des="请求购买作物加速道具" extends="MsgRequest">
@@ -428,7 +428,8 @@
 	<resp label="resp" name="SCSetPortrait" des="回复设置头像(Code码)" extends="MsgResponse">
 	</resp>
 	
-	<resp label="resp" name="SCSetNickname" des="回复设置昵称(Code码)" extends="MsgResponse">
+	<resp label="resp" name="SCSetNickname" des="回复设置昵称" extends="MsgResponse">
+		<field name="nickname" type="string" des="现在的昵称" />
 	</resp>
 	
 	<resp label="resp" name="SCSendHouseToFriend" des="回复发送小窝给好友" extends="MsgResponse">
@@ -530,7 +531,7 @@
 		<field name="listGranaryInfo" type="List[SeedInfo]" des="谷仓饲料列表" />
 	</resp>
 	
-	<resp label="resp" name="SCGranaryHarvest" des="回复谷仓信息" extends="MsgResponse">
+	<resp label="resp" name="SCGranaryInfo" des="回复谷仓信息" extends="MsgResponse">
 		<field name="listGranaryInfo" type="List[SeedInfo]" des="谷仓饲料列表" />
 		<field name="GridCount" type="int" des="格子总数" />
 	</resp>
@@ -594,6 +595,8 @@
 		<field name="Personal_TitleAlreadyExsit" msg="对应称号已存在"  value="402" />
 		<field name="Personal_TitleNotExsit" msg="对应称号不存在"  value="403" />
 		<field name="Personal_RewardAlreadyMax" msg="分享奖励次数已达最大"  value="404" />
+		
+		<field name="Farm_SeedCNotExsit" msg="种子配置不存在"  value="410" />
 
     </class>
     <!-- 错误码定义 -->
