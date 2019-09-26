@@ -59,6 +59,16 @@
 		<field name="Wheat" des="小麦" value="1" />
 		<field name="Pea" des="豌豆" value="2" />
 	</enum>
+	
+	<enum name="SubscriptionIntroductionType" des="订阅内容介绍类型">
+		<field name="Image" des="图片" value="0" />
+		<field name="Text" des="文本" value="1" />
+	</enum>
+	<enum name="SubscriptionUnlockState" des="订阅解锁状态">
+		<field name="NotUnlocked" des="未解锁" value="0" />
+		<field name="Unlocked" des="已解锁" value="1" />
+	</enum>
+	
     <!-- enum定义 -->
 
 
@@ -177,6 +187,23 @@
 	<class name="ImgBagInfo" des="图鉴信息">
 		<field name="imgId" type="int" des="图鉴id" />
 		<field name="time" type="long" des="获得时间" />
+	</class>
+	
+	<class name="SubscriptionIntroductionStruct" des="订阅内容">
+		<field name="type" type="SubscriptionIntroductionType" des="类型" />
+		<field name="content" type="string" des="内容" />
+	</class>
+	
+	<class name="SubscriptionInfo" des="订阅信息">
+		<field name="id" type="int" des="订阅id" />
+		<field name="introduction" type="SubscriptionIntroductionStruct" des="内容介绍" />
+		<field name="chapterId" type="int" des="章节id" />
+		<field name="shelfTime" type="long" des="上架时间" />
+		<field name="originalPrice" type="int" des="原价" />
+		<field name="promotionPrice" type="int" des="促销价" />
+		<field name="promotionTimeBegin" type="long" des="促销开始时间" />
+		<field name="promotionTimeEnd" type="long" des="促销结束时间" />
+		<field name="unlockState" type="SubscriptionUnlockState" des="解锁状态" />
 	</class>
     <!-- class定义 -->
 
@@ -360,6 +387,14 @@
 	<req name="CSRechargeVip" resp="SCRechargeVip" des="请求购买vip" extends="MsgRequest">
 		<field name="vipGrade" type="int" des="vip档位"/>
 	</req>
+	
+	<!-- 订阅 -->
+	<req name="CSSubscriptionInfo" resp="SCSubscriptionInfo" des="请求订阅信息" extends="MsgRequest">
+	</req>
+	<req name="CSBuySubscription" resp="SCBuySubscription" des="请求购买订阅" extends="MsgRequest">
+		<field name="subscriptionId" type="int" des="订阅Id"/>
+	</req>
+	<!-- 订阅 -->
 	
     <!-- 请求定义 -->
     
@@ -566,6 +601,15 @@
 		<field name="endTime" type="int" des="vip到期天数" />
 	</resp>
 	
+	<!-- 订阅 -->
+	<resp label="resp" name="SCSubscriptionInfo" des="回复订阅信息" extends="MsgResponse">
+		<field name="listSubscriptionInfo" type="list[SubscriptionInfo]" des="订阅信息" />
+	</resp>
+	<resp label="resp" name="SCBuySubscription" des="回复购买订阅" extends="MsgResponse">
+		<field name="yingHuaBi" type="int" des="樱花币" />
+	</resp>
+	<!-- 订阅 -->
+	
     <!-- 回复定义 -->
 
     <!-- 错误码定义 所有成功均返回value:0 -->
@@ -587,9 +631,12 @@
 		<field name="Friend_AdmiredDove" msg="今日已点赞鸽子"  value="303" />
 		<field name="Friend_AdmireHouseLimit" msg="今日点赞小窝已达上限"  value="304" />
 		<field name="Friend_AdmireDoveLimit" msg="今日点赞鸽子已达上限"  value="305" />
-		<field name="ExchangeCodeNotExist" msg="兑换码不存在"  value="306" />
-		<field name="ExchangeCodeUsed" msg="兑换码已使用"  value="307" />
-		<field name="ExchangedGift" msg="已兑换过该礼包"  value="308" />
+		<field name="Exchange_CodeNotExist" msg="兑换码不存在"  value="306" />
+		<field name="Exchange_CodeUsed" msg="兑换码已使用"  value="307" />
+		<field name="Exchange_ExchangedGift" msg="已兑换过该礼包"  value="308" />
+		
+		<field name="Subscription_NotExist" msg="订阅信息不存在"  value="309" />
+		<field name="Subscription_Obtained" msg="订阅已获得"  value="310" />
 		
 		
 		<field name="Personal_TitleConfigNotExsit" msg="对应称号配置不存在"  value="401" />
