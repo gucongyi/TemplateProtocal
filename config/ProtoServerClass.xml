@@ -114,6 +114,8 @@
         <field name="lastLoginCloudTime" type="long" des="最后登录时间戳"/>
         <field name="yingHuaBi" type="long" des="樱花币"/>
 		<field name="heartbeat" type="long" des="心动值"/>
+		<field name="vipTimeBegin" type="long" des="vip开始时间"/>
+		<field name="vipTimeEnd" type="long" des="vip结束时间"/>
         <field name="signInfo" type="List[GoodInfoSign]" des="签到配置"/>
         <field name="playerInfo" type="PlayerDataSimple" des="玩家信息"/>
         <field name="listFriend" type="List[PlayerDataSimple]" des="好友列表"/>
