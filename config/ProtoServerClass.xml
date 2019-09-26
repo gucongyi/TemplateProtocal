@@ -161,8 +161,7 @@
 	
 	<class name="GroundInfo" des="地块信息">
 		<field name="groundId" type="int" des="地块id"/>
-		<field name="isUse" type="bool" des="可用性"/>
-		<field name="seed" type="PlantType" des="种子类型"/>
+		<field name="seed" type="int" des="种子id"/>
 		<field name="sowTime" type="long" des="播种时间"/>
 		<field name="harvestTime" type="long" des="收获时间"/>
 	</class>
@@ -349,7 +348,7 @@
 	</req>
 	
 	<req name="CSSow" resp="SCSow" des="请求播种" extends="MsgRequest">
-		<field name="seedType" type="PlantType" des="种子列表"/>
+		<field name="seedType" type="int" des="种子id"/>
 		<field name="groundId" type="int" des="地块id"/>
 	</req>
 	
@@ -645,6 +644,10 @@
 		<field name="Personal_RewardAlreadyMax" msg="分享奖励次数已达最大"  value="404" />
 		
 		<field name="Farm_SeedCNotExsit" msg="种子配置不存在"  value="410" />
+		<field name="Farm_GroundCanNotUse" msg="地块不可使用"  value="411" />
+		<field name="Farm_GroundCanNotAccelerate" msg="地块不可加速"  value="412" />
+		<field name="Farm_AccelerateItemNotExsit" msg="加速道具配置不存在"  value="413" />
+		<field name="Farm_GridNotEnough" msg="谷仓格子不足"  value="414" />
 
     </class>
     <!-- 错误码定义 -->
