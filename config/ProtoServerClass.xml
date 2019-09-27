@@ -356,7 +356,6 @@
 	
 	<req name="CSPlantAccelerate" resp="SCPlantAccelerate" des="请求作物加速" extends="MsgRequest">
 		<field name="groundId" type="int" des="地块id"/>
-		<field name="listGoodsItem" type="List[GoodsItem]" des="加速物品"/>
 	</req>
 	
 	<req name="CSPlantHarvest" resp="SCPlantHarvest" des="请求作物收获" extends="MsgRequest">
@@ -367,7 +366,7 @@
 	</req>
 	
 	<req name="CSBuyAccelerate" resp="SCBuyAccelerate" des="请求购买作物加速道具" extends="MsgRequest">
-		<field name="listAccelerateInfo" type="List[GoodsItem]" des="购买作物加速道具列表"/>
+		<field name="AccelerateCount" type="int" des="购买作物加速道具数量"/>
 	</req>
 	
 	<req name="CSBuyGrid" resp="SCBuyGrid" des="请求购买格子" extends="MsgRequest">
