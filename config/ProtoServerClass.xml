@@ -350,7 +350,7 @@
 	</req>
 	
 	<req name="CSSow" resp="SCSow" des="请求播种" extends="MsgRequest">
-		<field name="seedType" type="int" des="种子id"/>
+		<field name="seedId" type="int" des="种子id"/>
 		<field name="groundId" type="int" des="地块id"/>
 	</req>
 	
@@ -604,7 +604,7 @@
 	
 	<!-- 订阅 -->
 	<resp label="resp" name="SCSubscriptionInfo" des="回复订阅信息" extends="MsgResponse">
-		<field name="listSubscriptionInfo" type="list[SubscriptionInfo]" des="订阅信息" />
+		<field name="listSubscriptionInfo" type="List[SubscriptionInfo]" des="订阅信息" />
 	</resp>
 	<resp label="resp" name="SCBuySubscription" des="回复购买订阅" extends="MsgResponse">
 		<field name="yingHuaBi" type="int" des="樱花币" />
