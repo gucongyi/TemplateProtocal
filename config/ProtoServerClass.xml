@@ -580,6 +580,7 @@
 	
 	<resp label="resp" name="SCBuyGrid" des="回复购买格子" extends="MsgResponse">
 		<field name="GridCount" type="int" des="格子总数" />
+		<field name="yingHuaBi" type="int" des="樱花币" />
 	</resp>
     <!-- 种植 -->
 	
