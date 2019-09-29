@@ -366,7 +366,7 @@
 	</req>
 	
 	<req name="CSBuyAccelerate" resp="SCBuyAccelerate" des="请求购买作物加速道具" extends="MsgRequest">
-		<field name="AccelerateCount" type="int" des="购买作物加速道具数量"/>
+		<field name="accelerateCount" type="int" des="购买作物加速道具数量"/>
 	</req>
 	
 	<req name="CSBuyGrid" resp="SCBuyGrid" des="请求购买格子" extends="MsgRequest">
@@ -395,6 +395,13 @@
 		<field name="subscriptionId" type="int" des="订阅Id"/>
 	</req>
 	<!-- 订阅 -->
+	
+	<!-- 心动值 -->
+	<req name="CSDistributeHeartBeat" resp="SCDistributeHeartBeat" des="请求分配心动值" extends="MsgRequest">
+		<field name="heartBeatPersonId" type="int" des="心动人物id"/>
+		<field name="heartBeatValue" type="int" des="心动值"/>
+	</req>
+	<!-- 心动值 -->
 	
     <!-- 请求定义 -->
     
@@ -611,6 +618,12 @@
 	</resp>
 	<!-- 订阅 -->
 	
+	<!-- 心动值 -->
+	<resp label="resp" name="SCDistributeHeartBeat" des="回复分配心动值" extends="MsgResponse">
+		<field name="heartBeatValue" type="int" des="心动值" />
+		<field name="listRewardItem" type="List[GoodsItem]" des="奖励物品列表" />
+	</resp>
+	<!-- 心动值 -->
     <!-- 回复定义 -->
 
     <!-- 错误码定义 所有成功均返回value:0 -->
@@ -650,6 +663,8 @@
 		<field name="Farm_GroundCanNotAccelerate" msg="地块不可加速"  value="412" />
 		<field name="Farm_AccelerateItemNotExsit" msg="加速道具配置不存在"  value="413" />
 		<field name="Farm_GridNotEnough" msg="谷仓格子不足"  value="414" />
+		
+		<field name="HertBeat_PersonNotExsit" msg="心动人物不存在"  value="420" />
 
     </class>
     <!-- 错误码定义 -->
