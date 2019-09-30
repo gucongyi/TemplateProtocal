@@ -684,9 +684,9 @@
 		<field name="Farm_AccelerateItemNotExsit" msg="加速道具配置不存在"  value="413" />
 		<field name="Farm_GridNotEnough" msg="谷仓格子不足"  value="414" />
 		
-		<field name="HertBeat_PersonNotExsit" msg="心动人物不存在"  value="420" />
-		<field name="HertBeat_GoodsNotExsit" msg="心动值商品配置不存在"  value="421" />
-		<field name="HertBeat_NotEnough" msg="心动值不足"  value="422" />
+		<field name="HeartBeat_PersonNotExsit" msg="心动人物不存在"  value="420" />
+		<field name="HeartBeat_GoodsNotExsit" msg="心动值商品配置不存在"  value="421" />
+		<field name="HeartBeat_NotEnough" msg="心动值不足"  value="422" />
 
     </class>
     <!-- 错误码定义 -->
