@@ -206,6 +206,11 @@
 		<field name="promotionTimeEnd" type="long" des="促销结束时间" />
 		<field name="unlockState" type="SubscriptionUnlockState" des="解锁状态" />
 	</class>
+	
+	<class name="RelationInfo" des="人物关系">
+		<field name="personId" type="int" des="人物id" />
+		<field name="heartbeat" type="int" des="心动值" />
+	</class>
     <!-- class定义 -->
 
 
@@ -397,9 +402,16 @@
 	<!-- 订阅 -->
 	
 	<!-- 心动值 -->
+	<req name="CSPersonRelation" resp="SCPersonRelation" des="请求人物关系" extends="MsgRequest">
+	</req>
+	
 	<req name="CSDistributeHeartBeat" resp="SCDistributeHeartBeat" des="请求分配心动值" extends="MsgRequest">
 		<field name="heartBeatPersonId" type="int" des="心动人物id"/>
 		<field name="heartBeatValue" type="int" des="心动值"/>
+	</req>
+	
+	<req name="CSBuyHeartBeatGoods" resp="SCBuyHeartBeatGoods" des="请求购买心动值商品" extends="MsgRequest">
+		<field name="heartbeatGoods" type="GoodsItem" des="心动值商品"/>
 	</req>
 	<!-- 心动值 -->
 	
@@ -619,9 +631,17 @@
 	<!-- 订阅 -->
 	
 	<!-- 心动值 -->
+	<resp label="resp" name="SCPersonRelation" des="回复人物关系" extends="MsgResponse">
+		<field name="listPersonRelation" type="List[RelationInfo]" des="奖励物品列表" />
+	</resp>
+	
 	<resp label="resp" name="SCDistributeHeartBeat" des="回复分配心动值" extends="MsgResponse">
 		<field name="heartBeatValue" type="int" des="心动值" />
 		<field name="listRewardItem" type="List[GoodsItem]" des="奖励物品列表" />
+	</resp>
+	
+	<resp label="resp" name="SCBuyHeartBeatGoods" des="回复购买心动值商品" extends="MsgResponse">
+		<field name="heartBeatValue" type="int" des="心动值" />
 	</resp>
 	<!-- 心动值 -->
     <!-- 回复定义 -->
@@ -665,6 +685,8 @@
 		<field name="Farm_GridNotEnough" msg="谷仓格子不足"  value="414" />
 		
 		<field name="HertBeat_PersonNotExsit" msg="心动人物不存在"  value="420" />
+		<field name="HertBeat_GoodsNotExsit" msg="心动值商品配置不存在"  value="421" />
+		<field name="HertBeat_NotEnough" msg="心动值不足"  value="422" />
 
     </class>
     <!-- 错误码定义 -->
