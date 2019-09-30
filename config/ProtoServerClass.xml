@@ -638,7 +638,7 @@
 	<resp label="resp" name="SCDistributeHeartBeat" des="回复分配心动值" extends="MsgResponse">
 		<field name="heartBeatValue" type="int" des="心动值" />
 		<field name="listRewardItem" type="List[GoodsItem]" des="礼物列表" />
-		<field name="listRewardTitle" type="List[GoodsItem]" des="称号列表" />
+		<field name="listRewardTitle" type="List[int]" des="称号列表" />
 	</resp>
 	
 	<resp label="resp" name="SCBuyHeartBeatGoods" des="回复购买心动值商品" extends="MsgResponse">
