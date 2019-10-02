@@ -179,7 +179,8 @@
 		<field name="yingHuaBiAttach" type="int" des="赠送的樱花币" />
     <field name="originprice" type="float" des="打折前价格" />
 		<field name="price" type="float" des="当前价格" />
-	</class>
+    <field name="isLimit" type="bool" des="是否限时" />
+  </class>
 	
 	<class name="RechargeVipInfo" des="购买vip面板信息">
     <field name="vipCardId" type="int" des="vip卡片id" />
