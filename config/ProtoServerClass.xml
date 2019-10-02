@@ -177,7 +177,8 @@
     <field name="reChargeId" type="int" des="充值的类型的id" />
 		<field name="yingHuaBi" type="int" des="樱花币" />
 		<field name="yingHuaBiAttach" type="int" des="赠送的樱花币" />
-		<field name="price" type="float" des="价格" />
+    <field name="originprice" type="float" des="打折前价格" />
+		<field name="price" type="float" des="当前价格" />
 	</class>
 	
 	<class name="RechargeVipInfo" des="购买vip面板信息">
