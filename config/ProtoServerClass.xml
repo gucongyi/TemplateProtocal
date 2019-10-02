@@ -174,12 +174,14 @@
 	</class>
 	
 	<class name="RechargeInfo" des="充值面板信息">
+    <field name="reChargeId" type="int" des="充值的类型的id" />
 		<field name="yingHuaBi" type="int" des="樱花币" />
 		<field name="yingHuaBiAttach" type="int" des="赠送的樱花币" />
 		<field name="price" type="float" des="价格" />
 	</class>
 	
 	<class name="RechargeVipInfo" des="购买vip面板信息">
+    <field name="vipCardId" type="int" des="vip卡片id" />
 		<field name="price" type="float" des="价格" />
 		<field name="days" type="int" des="天数" />
 		<field name="perYingHuaBi" type="int" des="每日樱花币" />
