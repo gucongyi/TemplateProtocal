@@ -64,9 +64,15 @@
 		<field name="Image" des="图片" value="0" />
 		<field name="Text" des="文本" value="1" />
 	</enum>
+	
 	<enum name="SubscriptionUnlockState" des="订阅解锁状态">
 		<field name="NotUnlocked" des="未解锁" value="0" />
 		<field name="Unlocked" des="已解锁" value="1" />
+	</enum>
+	
+	<enum name="MallType" des="商店类型">
+		<field name="Mall" des="普通商店" value="0" />
+		<field name="HeartBeatGoodsMall" des="心动值商店" value="1" />
 	</enum>
 	
     <!-- enum定义 -->
@@ -597,7 +603,7 @@
 	</resp>
 	
 	<resp label="resp" name="SCBuyAccelerate" des="回复购买作物加速道具" extends="MsgResponse">
-		<field name="listAccelerate" type="List[GoodsItem]" des="作物加速道具列表" />
+		<field name="accelerate" type="GoodsItem" des="够买的作物加速道具" />
 		<field name="yingHuaBi" type="int" des="樱花币" />
 	</resp>
 	
